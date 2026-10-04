@@ -1,0 +1,447 @@
+/* GERAL */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #fff;
+    color: #111;
+}
+
+/* MENU */
+.navbar {
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-link {
+    margin-left: 10px;
+}
+
+/* HERO */
+.hero {
+    background-color: #f5f5f5;
+    padding: 80px 0;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+.hero img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* BOTÕES */
+.btn-warning {
+    background-color: #ffd000;
+    border-color: #ffd000;
+    color: #111;
+    font-weight: bold;
+}
+
+.btn-warning:hover {
+    background-color: #e6b900;
+    border-color: #e6b900;
+    color: #111;
+}
+
+/* CATÁLOGO */
+section.py-5 {
+    background-color: #fff;
+}
+
+section.py-5 h2 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+section.py-5 .text-center p {
+    color: #666;
+}
+
+/* CARDS */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.card-text {
+    color: #555;
+}
+
+.card h6 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* ACESSIBILIDADE */
+body,
+main,
+.card,
+.form-control,
+.form-select,
+textarea {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.acessibilidade {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.acessibilidade button {
+    min-width: 38px;
+    font-weight: bold;
+}
+
+/* ALTO CONTRASTE */
+body.alto-contraste,
+body.alto-contraste main,
+body.alto-contraste main section,
+body.alto-contraste .hero,
+body.alto-contraste .bg-light {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+body.alto-contraste main h1,
+body.alto-contraste main h2,
+body.alto-contraste main h3,
+body.alto-contraste main h4,
+body.alto-contraste main h5,
+body.alto-contraste main h6,
+body.alto-contraste main p,
+body.alto-contraste main label,
+body.alto-contraste .text-muted,
+body.alto-contraste section.py-5 .text-center p {
+    color: #fff !important;
+}
+
+body.alto-contraste .card {
+    background-color: #111 !important;
+    color: #fff !important;
+    border-color: #ffc107 !important;
+}
+
+body.alto-contraste .card-title,
+body.alto-contraste .card-text,
+body.alto-contraste .card h6,
+body.alto-contraste .card p {
+    color: #fff !important;
+}
+
+body.alto-contraste main a:not(.btn) {
+    color: #ffc107 !important;
+}
+
+body.alto-contraste .form-control,
+body.alto-contraste .form-select,
+body.alto-contraste textarea {
+    background-color: #111 !important;
+    color: #fff !important;
+    border-color: #ffc107 !important;
+}
+
+body.alto-contraste .form-control:read-only {
+    background-color: #222 !important;
+    color: #fff !important;
+}
+
+body.alto-contraste .form-control::placeholder,
+body.alto-contraste textarea::placeholder {
+    color: #ddd !important;
+}
+
+body.alto-contraste .form-select option {
+    background-color: #111;
+    color: #fff;
+}
+
+body.alto-contraste hr {
+    border-color: #ffc107 !important;
+    opacity: 1;
+}
+
+/* TAMANHO DA FONTE */
+body.fonte-grande main {
+    font-size: 1.15rem;
+}
+
+body.fonte-extra-grande main {
+    font-size: 1.3rem;
+}
+
+body.fonte-grande main h1 {
+    font-size: 3rem;
+}
+
+body.fonte-extra-grande main h1 {
+    font-size: 3.4rem;
+}
+
+body.fonte-grande main h2 {
+    font-size: 2.4rem;
+}
+
+body.fonte-extra-grande main h2 {
+    font-size: 2.8rem;
+}
+
+body.fonte-grande main h3 {
+    font-size: 2rem;
+}
+
+body.fonte-extra-grande main h3 {
+    font-size: 2.3rem;
+}
+
+/* 404 */
+body.fonte-grande main .display-1 {
+    font-size: 7rem;
+}
+
+body.fonte-extra-grande main .display-1 {
+    font-size: 8rem;
+}
+
+body.fonte-grande main .display-4 {
+    font-size: 4rem;
+}
+
+body.fonte-extra-grande main .display-4 {
+    font-size: 4.5rem;
+}
+
+/* CELULAR */
+@media (max-width: 768px) {
+    .hero {
+        padding: 50px 0;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .hero img {
+        margin-top: 30px;
+    }
+
+    section.py-5 {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .acessibilidade {
+        margin: 10px 0;
+        flex-wrap: wrap;
+    }
+}
+/* Fonte maior nos cards do Dashboard */
+.fonte-grande main .card h4 {
+    font-size: 1.7rem;
+}
+
+.fonte-extra-grande main .card h4 {
+    font-size: 2rem;
+}
+
+.fonte-grande main .card p,
+.fonte-grande main .card .btn {
+    font-size: 1.1rem;
+}
+
+.fonte-extra-grande main .card p,
+.fonte-extra-grande main .card .btn {
+    font-size: 1.25rem;
+}
+/* Botão no alto contraste */
+body.alto-contraste .btn-outline-dark {
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+body.alto-contraste .btn-outline-dark:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+/* Hero principal */
+.hero-principal {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.55) 45%,
+            rgba(0, 0, 0, 0.15) 100%
+        ),
+        url("../assets/img/carro-principal.jpg");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-principal .hero-conteudo {
+    max-width: 600px;
+}
+
+.hero-principal h1 {
+    color: #fff;
+}
+
+.hero-principal p {
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+
+    .hero-principal {
+        min-height: 500px;
+
+        background:
+            linear-gradient(
+                rgba(0, 0, 0, 0.65),
+                rgba(0, 0, 0, 0.65)
+            ),
+            url("../assets/img/carro-principal.jpg");
+
+        background-size: cover;
+        background-position: center;
+    }
+
+    .hero-principal .hero-conteudo {
+        text-align: center;
+        margin: auto;
+    }
+}/* Menu fixo no topo */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+/* Ajuste de fonte no Hero */
+.fonte-grande .hero-principal h1 {
+    font-size: 3.3rem;
+}
+
+.fonte-extra-grande .hero-principal h1 {
+    font-size: 3.8rem;
+}
+
+.fonte-grande .hero-principal p {
+    font-size: 1.35rem;
+}
+
+.fonte-extra-grande .hero-principal p {
+    font-size: 1.55rem;
+}
+
+.fonte-grande .hero-principal .btn {
+    font-size: 1.15rem;
+}
+
+.fonte-extra-grande .hero-principal .btn {
+    font-size: 1.3rem;
+}
+/* Logo do site */
+.logo-site {
+    width: 300px;
+    height: 85px;
+    object-fit: contain;
+}
+/* Navbar branca */
+.navbar {
+    background-color: #ffffff !important;
+}
+
+.navbar .nav-link {
+    color: #111 !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: #d4a900 !important;
+}
+/* Navbar branca */
+.navbar {
+    background-color: #fff !important;
+}
+
+.navbar .nav-link {
+    color: #111 !important;
+}
+
+/* Botões na navbar branca */
+.navbar .btn-outline-light {
+    color: #111 !important;
+    border-color: #111 !important;
+}
+
+/* Navbar no alto contraste */
+body.alto-contraste .navbar {
+    background-color: #000 !important;
+}
+
+body.alto-contraste .navbar .nav-link {
+    color: #fff !important;
+}
+
+body.alto-contraste .navbar .btn-outline-light {
+    color: #fff !important;
+    border-color: #fff !important;
+}
+/* Navbar no modo normal */
+.navbar .nav-link {
+    color: #111 !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: #d6a900 !important;
+}
+
+/* Navbar no alto contraste */
+body.alto-contraste .navbar .nav-link {
+    color: #fff !important;
+}
+
+body.alto-contraste .navbar .nav-link:hover,
+body.alto-contraste .navbar .nav-link.active {
+    color: #ffc107 !important;
+}

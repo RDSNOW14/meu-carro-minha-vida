@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Carro, Minha Vida</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .navbar .nav-link,
+        .navbar .navbar-text,
+        .navbar .btn { white-space: nowrap; }
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            .navbar .navbar-nav { align-items: flex-start !important; }
+            .navbar .nav-item { margin-left: 0 !important; }
+            .navbar .navbar-collapse { padding-top: .75rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MENU -->
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+    <img src="assets/icons/logo.png"
+     id="logoSite"
+     alt="Meu Carro, Minha Vida"
+     class="logo-site">
+</a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu"
+                aria-label="Abrir menu"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            Início
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                        >
+                            Carros
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a class="dropdown-item" href="#esportivos">
+                                    Esportivos
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#sedans">
+                                    Sedans
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#suvs">
+                                    SUVs
+                                </a>
+                            </li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#catalogo">
+                                    Todos os carros
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre">
+                            Sobre nós
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">
+                            Contato
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+    <a class="nav-link" href="login.html" id="linkConta">
+        Entrar
+    </a>
+</li>
+
+<li class="nav-item d-none" id="areaAjudaIndex">
+    <a class="nav-link" href="dashboard.html#areaReclamacoes">Ajuda</a>
+</li>
+<li class="nav-item ms-lg-2 d-none" id="areaUsuarioIndex">
+    <span class="navbar-text text-warning" id="nomeUsuarioIndex"></span>
+</li>
+
+<li class="nav-item ms-lg-2 d-none" id="areaSairIndex">
+    <button
+        type="button"
+        class="btn btn-outline-warning btn-sm"
+        id="botaoSairIndex"
+    >
+        Sair
+    </button>
+</li>
+
+                    <li class="nav-item ms-lg-3">
+
+                        <div class="acessibilidade">
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-light btn-sm"
+                                id="diminuirFonte"
+                            >
+                                A−
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-light btn-sm"
+                                id="aumentarFonte"
+                            >
+                                A+
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-warning btn-sm"
+                                id="alternarContraste"
+                            >
+                                Contraste
+                            </button>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- DESTAQUE -->
+<section class="hero hero-principal">
+
+    <div class="container">
+
+        <div class="hero-conteudo">
+
+            <h1>Encontre o carro ideal para você</h1>
+
+            <p>
+                Descubra carros que combinam com seu estilo,
+                suas necessidades e seus sonhos.
+            </p>
+
+            <a href="#catalogo" class="btn btn-warning">
+                Ver carros
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+        <!-- CATÁLOGO -->
+        <section class="py-5" id="catalogo">
+
+            <div class="container">
+
+                <div class="text-center mb-5">
+
+                    <h2>Carros em destaque</h2>
+
+                    <p>
+                        Confira alguns dos veículos disponíveis.
+                    </p>
+
+                </div>
+
+
+                <!-- ESPORTIVOS -->
+                <div id="esportivos" class="mb-5">
+
+                    <h3 class="mb-4">Esportivos</h3>
+
+                    <div class="row g-4">
+
+                        <!-- FALCON -->
+                        <div class="col-md-6">
+
+                            <div class="card h-100">
+
+                                <img
+                                    src="assets/img/carro-1.jpg"
+                                    class="card-img-top"
+                                    alt="Falcon GT 2026"
+                                >
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">
+                                        Falcon GT 2026
+                                    </h5>
+
+                                    <p class="card-text">
+                                        Carro esportivo moderno, com design
+                                        marcante e excelente desempenho.
+                                    </p>
+
+                                    <h6>R$ 189.990</h6>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-warning"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalFalcon"
+                                    >
+                                        Ver detalhes
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- VORTEX -->
+                        <div class="col-md-6">
+
+                            <div class="card h-100">
+
+                                <img
+                                    src="assets/img/carro-4.jpg"
+                                    class="card-img-top"
+                                    alt="Vortex RS 2026"
+                                >
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">
+                                        Vortex RS 2026
+                                    </h5>
+
+                                    <p class="card-text">
+                                        Esportivo potente com visual agressivo,
+                                        tecnologia e foco em desempenho.
+                                    </p>
+
+                                    <h6>R$ 219.990</h6>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-warning"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalVortex"
+                                    >
+                                        Ver detalhes
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEDANS -->
+                <div id="sedans" class="mb-5">
+
+                    <h3 class="mb-4">Sedans</h3>
+
+                    <div class="row g-4">
+
+                        <!-- URBAN -->
+                        <div class="col-md-6">
+
+                            <div class="card h-100">
+
+                                <img
+                                    src="assets/img/carro-2.jpg"
+                                    class="card-img-top"
+                                    alt="Urban Sedan 2026"
+                                >
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">
+                                        Urban Sedan 2026
+                                    </h5>
+
+                                    <p class="card-text">
+                                        Sedan confortável e tecnológico,
+                                        ideal para o dia a dia.
+                                    </p>
+
+                                    <h6>R$ 129.990</h6>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-warning"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalSedan"
+                                    >
+                                        Ver detalhes
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PRIME -->
+                        <div class="col-md-6">
+
+                            <div class="card h-100">
+
+                                <img
+                                    src="assets/img/carro-5.jpg"
+                                    class="card-img-top"
+                                    alt="Prime Sedan 2026"
+                                >
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">
+                                        Prime Sedan 2026
+                                    </h5>
+
+                                    <p class="card-text">
+                                        Sedan moderno com conforto,
+                                        espaço interno e tecnologia.
+                                    </p>
+
+                                    <h6>R$ 149.990</h6>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-warning"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalPrime"
+                                    >
+                                        Ver detalhes
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUVS -->
+                <div id="suvs">
+
+                    <h3 class="mb-4">SUVs</h3>
+
+                    <div class="row g-4">
+
+                        <!-- ADVENTURE -->
+                        <div class="col-md-6">
+
+                            <div class="card h-100">
+
+                                <img
+                                    src="assets/img/carro-3.jpg"
+                                    class="card-img-top"
+                                    alt="Adventure SUV 2026"
+                                >
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">
+                                        Adventure SUV 2026
+                                    </h5>
+
+                                    <p class="card-text">
+                                        SUV espaçoso e versátil para quem busca
+                                        conforto e aventura.
+                                    </p>
+
+                                    <h6>R$ 159.990</h6>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-warning"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalSUV"
+                                    >
+                                        Ver detalhes
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- TITAN -->
+                        <div class="col-md-6">
+
+                            <div class="card h-100">
+
+                                <img
+                                    src="assets/img/carro-6.jpg"
+                                    class="card-img-top"
+                                    alt="Titan SUV 2026"
+                                >
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">
+                                        Titan SUV 2026
+                                    </h5>
+
+                                    <p class="card-text">
+                                        SUV robusto com ótimo espaço interno,
+                                        conforto e versatilidade.
+                                    </p>
+
+                                    <h6>R$ 179.990</h6>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-warning"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalTitan"
+                                    >
+                                        Ver detalhes
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SOBRE -->
+        <section class="py-5 bg-light" id="sobre">
+
+            <div class="container text-center">
+
+                <h2>Sobre nós</h2>
+
+                <p>
+                    A Meu Carro, Minha Vida foi criada para ajudar pessoas
+                    a encontrarem veículos que combinam com seu estilo,
+                    suas necessidades e seu orçamento.
+                </p>
+
+                <p>
+                    Nosso objetivo é apresentar opções de veículos de forma
+                    simples e facilitar o contato de clientes interessados.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTATO -->
+        <section class="py-5" id="contato">
+
+            <div class="container text-center">
+
+                <h2>Entre em contato</h2>
+
+                <p>
+                    Ficou interessado em algum dos nossos veículos?
+                    Entre em contato conosco.
+                </p>
+
+                <p>
+                    <strong>Telefone:</strong>
+                    (21) 99999-9999
+                </p>
+
+                <p>
+                    <strong>E-mail:</strong>
+                    contato@meucarrominhavida.com.br
+                </p>
+
+                <p>
+                    <strong>Horário de atendimento:</strong>
+                    Segunda a sábado, das 9h às 18h.
+                </p>
+
+                <a
+                    href="cadastro.html"
+                    class="btn btn-warning"
+                    id="botaoContato"
+                >
+                    Criar uma conta
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- MODAL FALCON -->
+    <div class="modal fade" id="modalFalcon" tabindex="-1">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Falcon GT 2026
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"
+                    ></button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <p><strong>Categoria:</strong> Esportivo</p>
+                    <p><strong>Preço:</strong> R$ 189.990</p>
+                    <p><strong>Combustível:</strong> Gasolina</p>
+                    <p><strong>Câmbio:</strong> Automático</p>
+
+                    <p>
+                        Modelo esportivo com design moderno,
+                        bom desempenho e foco em tecnologia.
+                    </p>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        Fechar
+                    </button>
+                    <a href="compra.html?modelo=Falcon%20GT%202026&preco=189990"
+       class="btn btn-dark">
+        Comprar
+    </a>
+
+                    <a
+                        href="cadastro.html"
+                        class="btn btn-warning link-interesse"
+                        data-tipo="Esportivo"
+                        data-modelo="Falcon GT 2026"
+                        data-preco="190000"
+                    >
+                        Tenho interesse
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL VORTEX -->
+    <div class="modal fade" id="modalVortex" tabindex="-1">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Vortex RS 2026
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"
+                    ></button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <p><strong>Categoria:</strong> Esportivo</p>
+                    <p><strong>Preço:</strong> R$ 219.990</p>
+                    <p><strong>Combustível:</strong> Gasolina</p>
+                    <p><strong>Câmbio:</strong> Automático</p>
+
+                    <p>
+                        Esportivo potente com design agressivo,
+                        tecnologia e excelente desempenho.
+                    </p>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        Fechar
+                    </button>
+                    <a href="compra.html?modelo=Vortex%20RS%202026&preco=219990"
+   class="btn btn-dark">
+    Comprar
+</a>
+
+                    <a
+                        href="cadastro.html"
+                        class="btn btn-warning link-interesse"
+                        data-tipo="Esportivo"
+                        data-modelo="Vortex RS 2026"
+                        data-preco="220000"
+                    >
+                        Tenho interesse
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL URBAN -->
+    <div class="modal fade" id="modalSedan" tabindex="-1">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Urban Sedan 2026
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"
+                    ></button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <p><strong>Categoria:</strong> Sedan</p>
+                    <p><strong>Preço:</strong> R$ 129.990</p>
+                    <p><strong>Combustível:</strong> Flex</p>
+                    <p><strong>Câmbio:</strong> Automático</p>
+
+                    <p>
+                        Sedan confortável e tecnológico,
+                        indicado para uso diário e viagens.
+                    </p>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        Fechar
+                    </button>
+                    <a href="compra.html?modelo=Urban%20Sedan%202026&preco=129990"
+   class="btn btn-dark">
+    Comprar
+</a>
+
+                    <a
+                        href="cadastro.html"
+                        class="btn btn-warning link-interesse"
+                        data-tipo="Sedan"
+                        data-modelo="Urban Sedan 2026"
+                        data-preco="130000"
+                    >
+                        Tenho interesse
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL PRIME -->
+    <div class="modal fade" id="modalPrime" tabindex="-1">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Prime Sedan 2026
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"
+                    ></button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <p><strong>Categoria:</strong> Sedan</p>
+                    <p><strong>Preço:</strong> R$ 149.990</p>
+                    <p><strong>Combustível:</strong> Flex</p>
+                    <p><strong>Câmbio:</strong> Automático</p>
+
+                    <p>
+                        Sedan moderno com bom espaço interno,
+                        conforto e recursos tecnológicos.
+                    </p>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        Fechar
+                    </button>
+                    <a href="compra.html?modelo=Prime%20Sedan%202026&preco=149990"
+   class="btn btn-dark">
+    Comprar
+</a>
+
+                    <a
+                        href="cadastro.html"
+                        class="btn btn-warning link-interesse"
+                        data-tipo="Sedan"
+                        data-modelo="Prime Sedan 2026"
+                        data-preco="150000"
+                    >
+                        Tenho interesse
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL ADVENTURE -->
+    <div class="modal fade" id="modalSUV" tabindex="-1">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Adventure SUV 2026
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"
+                    ></button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <p><strong>Categoria:</strong> SUV</p>
+                    <p><strong>Preço:</strong> R$ 159.990</p>
+                    <p><strong>Combustível:</strong> Flex</p>
+                    <p><strong>Câmbio:</strong> Automático</p>
+
+                    <p>
+                        SUV espaçoso e versátil, indicado para famílias,
+                        viagens e quem procura mais conforto.
+                    </p>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        Fechar
+                    </button>
+                    <a href="compra.html?modelo=Adventure%20SUV%202026&preco=159990"
+   class="btn btn-dark">
+    Comprar
+</a>
+
+                    <a
+                        href="cadastro.html"
+                        class="btn btn-warning link-interesse"
+                        data-tipo="SUV"
+                        data-modelo="Adventure SUV 2026"
+                        data-preco="160000"
+                    >
+                        Tenho interesse
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL TITAN -->
+    <div class="modal fade" id="modalTitan" tabindex="-1">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Titan SUV 2026
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"
+                    ></button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <p><strong>Categoria:</strong> SUV</p>
+                    <p><strong>Preço:</strong> R$ 179.990</p>
+                    <p><strong>Combustível:</strong> Flex</p>
+                    <p><strong>Câmbio:</strong> Automático</p>
+
+                    <p>
+                        SUV robusto e espaçoso para viagens,
+                        família e diferentes tipos de terreno.
+                    </p>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        Fechar
+                    </button>
+                    <a href="compra.html?modelo=Titan%20SUV%202026&preco=179990"
+   class="btn btn-dark">
+    Comprar
+</a>
+
+                    <a
+                        href="cadastro.html"
+                        class="btn btn-warning link-interesse"
+                        data-tipo="SUV"
+                        data-modelo="Titan SUV 2026"
+                        data-preco="180000"
+                    >
+                        Tenho interesse
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script src="js/script.js"></script>
+
+
+    <!-- INTERESSE PELO VEÍCULO -->
+    <script>
+
+        const botoesInteresse =
+            document.querySelectorAll(".link-interesse");
+
+        const botaoContato =
+            document.getElementById("botaoContato");
+
+        const sessaoSalvaIndex =
+            localStorage.getItem("usuarioLogado");
+
+
+        if (sessaoSalvaIndex) {
+
+            const sessaoIndex =
+                JSON.parse(sessaoSalvaIndex);
+
+
+            if (sessaoIndex.logado === true) {
+
+                botoesInteresse.forEach(function (botao) {
+
+                    const tipo =
+                        botao.dataset.tipo;
+
+                    const modelo =
+                        botao.dataset.modelo;
+
+                    const preco =
+                        botao.dataset.preco;
+
+
+                    botao.href =
+                        "interesse.html?tipo=" +
+                        encodeURIComponent(tipo) +
+                        "&modelo=" +
+                        encodeURIComponent(modelo) +
+                        "&preco=" +
+                        preco;
+
+                });
+
+
+                if (botaoContato) {
+
+                    botaoContato.href =
+                        "interesse.html";
+
+                    botaoContato.textContent =
+                        "Demonstrar interesse";
+
+                }
+
+            }
+
+        }
+    // Usuário logado no menu
+    const linkContaIndex = document.getElementById("linkConta");
+    const areaUsuarioIndex = document.getElementById("areaUsuarioIndex");
+    const nomeUsuarioIndex = document.getElementById("nomeUsuarioIndex");
+    const areaSairIndex = document.getElementById("areaSairIndex");
+    const botaoSairIndex = document.getElementById("botaoSairIndex");
+
+    if (sessaoSalvaIndex) {
+
+        const usuarioIndex = JSON.parse(sessaoSalvaIndex);
+
+        if (usuarioIndex.logado === true) {
+
+            linkContaIndex.textContent = "Minha área";
+            linkContaIndex.href = "dashboard.html";
+
+            nomeUsuarioIndex.textContent = usuarioIndex.nome;
+
+            document.getElementById("areaAjudaIndex").classList.remove("d-none");
+            areaUsuarioIndex.classList.remove("d-none");
+            areaSairIndex.classList.remove("d-none");
+        }
+    }
+
+    if (botaoSairIndex) {
+
+        botaoSairIndex.addEventListener("click", function () {
+
+            localStorage.removeItem("usuarioLogado");
+            window.location.href = "login.html";
+
+        });
+    }
+    // Troca a logo conforme o contraste
+const logoSite = document.getElementById("logoSite");
+
+function atualizarLogo() {
+    if (document.body.classList.contains("alto-contraste")) {
+        logoSite.src = "assets/icons/logo-escura.png";
+    } else {
+        logoSite.src = "assets/icons/logo.png";
+    }
+}
+
+document.getElementById("alternarContraste").addEventListener("click", function () {
+    setTimeout(atualizarLogo, 100);
+});
+
+atualizarLogo();
+
+</script>
+
+</body>
+
+</html>

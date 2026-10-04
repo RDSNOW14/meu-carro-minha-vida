@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Área - Meu Carro, Minha Vida</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body.alto-contraste .confirmacao-exclusao {
+            background-color: #181818 !important;
+            border-color: #ffd700 !important;
+            color: #ffffff !important;
+        }
+        body.alto-contraste .confirmacao-exclusao p {
+            color: #ffffff !important;
+        }
+        body.alto-contraste .confirmacao-exclusao .btn-outline-secondary {
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+        body.alto-contraste .confirmacao-exclusao .btn-outline-secondary:hover,
+        body.alto-contraste .confirmacao-exclusao .btn-outline-secondary:focus-visible {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">MEU CARRO, MINHA VIDA</a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#menu"
+                    aria-label="Abrir menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">Minha área</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Ver carros</a>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="#areaCompras">Minhas compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#areaReclamacoes">Ajuda</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <div class="acessibilidade">
+                            <button type="button" class="btn btn-outline-light btn-sm"
+                                    id="diminuirFonte" aria-label="Diminuir tamanho da fonte">
+                                A−
+                            </button>
+
+                            <button type="button" class="btn btn-outline-light btn-sm"
+                                    id="aumentarFonte" aria-label="Aumentar tamanho da fonte">
+                                A+
+                            </button>
+
+                            <button type="button" class="btn btn-outline-warning btn-sm"
+                                    id="alternarContraste" aria-label="Ativar ou desativar alto contraste">
+                                Contraste
+                            </button>
+                        </div>
+                    </li>
+
+                    <li class="nav-item ms-lg-3">
+                        <span class="navbar-text text-warning" id="nomeUsuario">Usuário</span>
+                    </li>
+
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-outline-warning btn-sm" id="botaoSair">Sair</button>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+
+        <div class="mb-5">
+            <h1>Minha área</h1>
+            <p class="text-muted">Bem-vindo ao portal Meu Carro, Minha Vida.</p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title">Meu perfil</h4>
+                        <p class="card-text">Consulte seus dados cadastrados no portal.</p>
+                        <button class="btn btn-warning" id="botaoPerfil">Ver meus dados</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title">Meu interesse</h4>
+                        <p class="card-text">Informe suas preferências para encontrarmos o carro ideal para você.</p>
+                        <a href="resultado.html" class="btn btn-warning">Ver meu interesse</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title">Carros</h4>
+                        <p class="card-text">Volte ao catálogo e confira os veículos disponíveis.</p>
+                        <a href="index.html#catalogo" class="btn btn-warning">Ver carros</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <section class="mt-5 d-none" id="areaPerfil">
+            <div class="card shadow-sm">
+                <div class="card-body">
+
+                    <h3 class="mb-4">Meus dados</h3>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong>Nome:</strong>
+                            <p id="perfilNome">-</p>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>CPF:</strong>
+                            <p id="perfilCpf">-</p>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>Cidade:</strong>
+                            <p id="perfilCidade">-</p>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>UF:</strong>
+                            <p id="perfilUf">-</p>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>Celular:</strong>
+                            <p id="perfilCelular">-</p>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>Login:</strong>
+                            <p id="perfilLogin">-</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-5" id="areaCompras" aria-labelledby="tituloCompras">
+            <h2 class="mb-4" id="tituloCompras">Minhas compras</h2>
+            <p id="comprasVazias">Você ainda não realizou uma compra.</p>
+            <div class="row g-4" id="listaCompras"></div>
+        </section>
+
+        <section class="mt-5" id="areaReclamacoes" aria-labelledby="tituloReclamacoes">
+            <h2 id="tituloReclamacoes" class="mb-3">Ajuda e reclamações</h2>
+            <p>Registre um problema relacionado à sua compra.</p>
+
+            <button type="button" class="btn btn-warning mb-3" id="abrirReclamacao" aria-expanded="false" aria-controls="formReclamacao">Registrar reclamação</button>
+            <form id="formReclamacao" class="card card-body d-none mb-4">
+                <div class="mb-3"><label for="compraReclamacao" class="form-label">Compra relacionada</label><select id="compraReclamacao" class="form-select" required></select></div>
+                <div class="mb-3"><label for="assuntoReclamacao" class="form-label">Assunto</label><select id="assuntoReclamacao" class="form-select" required><option value="">Selecione</option><option>Pagamento</option><option>Veículo</option><option>Atendimento</option><option>Outro</option></select></div>
+                <div class="mb-3"><label for="descricaoReclamacao" class="form-label">Descrição do problema</label><textarea id="descricaoReclamacao" class="form-control" rows="4" maxlength="2000" required></textarea></div>
+                <button type="submit" class="btn btn-warning align-self-start">Salvar reclamação</button>
+            </form>
+            <p id="mensagemReclamacao" role="status" aria-live="polite"></p>
+            <div id="listaReclamacoes" class="row g-3"></div>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+    (function () {
+        let compras, usuario;
+        try {
+            usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+            if (!usuario || usuario.logado !== true) return;
+            const historico = localStorage.getItem("historicoCompras");
+            compras = historico ? JSON.parse(historico) : [];
+            if (!historico) {
+                const anterior = JSON.parse(localStorage.getItem("compraRealizada"));
+                if (anterior) compras.push(anterior);
+                localStorage.setItem("historicoCompras", JSON.stringify(compras));
+            }
+        } catch (erro) { return; }
+        if (!Array.isArray(compras)) return;
+        const minhasCompras = compras.filter(compra => compra && compra.comprador === usuario.nome).reverse();
+        if (!minhasCompras.length) return;
+        document.getElementById("comprasVazias").classList.add("d-none");
+        const lista = document.getElementById("listaCompras");
+        minhasCompras.forEach(function (compra) {
+            const coluna = document.createElement("div");
+            coluna.className = "col-md-6 col-lg-4";
+            const cartao = ["cartao", "Cartao", "Cartão"].includes(compra.pagamento);
+            const dados = [
+                ["Valor", Number(compra.preco).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})],
+                ["Forma de pagamento", cartao ? "Cartão" : compra.pagamento],
+                ["Parcelas", compra.pagamento === "PIX" || compra.parcelas === "À vista" ? "À vista" : compra.parcelas + "x"]
+            ];
+            if (compra.endereco) {
+                const e = compra.endereco;
+                const endereco = [e.logradouro, e.bairro, [e.cidade, e.uf].filter(Boolean).join(" - "), e.cep ? "CEP: " + e.cep : ""].filter(Boolean).join(", ");
+                if (endereco) dados.push(["Endereço", endereco]);
+            }
+            const card = document.createElement("div");
+            card.className = "card h-100 shadow-sm";
+            const corpo = document.createElement("div");
+            corpo.className = "card-body";
+            const titulo = document.createElement("h3");
+            titulo.className = "card-title h4";
+            titulo.textContent = compra.modelo;
+            corpo.appendChild(titulo);
+            const status = document.createElement("p");
+            status.className = "text-success fw-bold";
+            status.textContent = compra.status === "Cancelada" ? "Compra cancelada" : "Compra realizada com sucesso";
+            if (compra.status === "Cancelada") status.className = "text-danger fw-bold";
+            corpo.appendChild(status);
+            dados.forEach(function (dado) {
+                const linha = document.createElement("p");
+                const rotulo = document.createElement("strong");
+                rotulo.textContent = dado[0] + ": ";
+                const valor = document.createElement("span");
+                valor.textContent = dado[1];
+                linha.appendChild(rotulo);
+                linha.appendChild(valor);
+                corpo.appendChild(linha);
+            });
+            if (compra.status !== "Cancelada") {
+                const cancelarCompra = document.createElement("button");
+                cancelarCompra.type = "button";
+                cancelarCompra.className = "btn btn-outline-danger";
+                cancelarCompra.textContent = "Cancelar compra";
+                const aviso = document.createElement("div");
+                aviso.className = "alert alert-warning confirmacao-exclusao mt-3 d-none";
+                const pergunta = document.createElement("p");
+                pergunta.textContent = "Cancelar a compra do " + compra.modelo + "? Ela continuará no histórico como cancelada.";
+                const confirmar = document.createElement("button");
+                confirmar.type = "button";
+                confirmar.className = "btn btn-danger me-2";
+                confirmar.textContent = "Confirmar cancelamento";
+                const voltar = document.createElement("button");
+                voltar.type = "button";
+                voltar.className = "btn btn-outline-secondary";
+                voltar.textContent = "Voltar";
+                aviso.appendChild(pergunta);
+                aviso.appendChild(confirmar);
+                aviso.appendChild(voltar);
+                cancelarCompra.addEventListener("click", function () {
+                    aviso.classList.remove("d-none");
+                    cancelarCompra.classList.add("d-none");
+                    voltar.focus();
+                });
+                voltar.addEventListener("click", function () {
+                    aviso.classList.add("d-none");
+                    cancelarCompra.classList.remove("d-none");
+                    cancelarCompra.focus();
+                });
+                confirmar.addEventListener("click", function () {
+                    const historico = JSON.parse(localStorage.getItem("historicoCompras"));
+                    const indice = compras.indexOf(compra);
+                    if (!historico || !historico[indice] || historico[indice].comprador !== usuario.nome) return;
+                    historico[indice].status = "Cancelada";
+                    try { localStorage.setItem("historicoCompras", JSON.stringify(historico)); }
+                    catch (erro) { pergunta.textContent = "Não foi possível cancelar. Tente novamente."; return; }
+                    compra.status = "Cancelada";
+                    status.textContent = "Compra cancelada";
+                    status.className = "text-danger fw-bold";
+                    status.setAttribute("role", "status");
+                    aviso.classList.add("d-none");
+                    titulo.setAttribute("tabindex", "-1");
+                    titulo.focus();
+                });
+                corpo.appendChild(cancelarCompra);
+                corpo.appendChild(aviso);
+            }
+            card.appendChild(corpo);
+            coluna.appendChild(card);
+            lista.appendChild(coluna);
+        });
+    })();
+    </script>
+
+    <script>
+    (function () {
+        const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+        if (!usuario || usuario.logado !== true) return;
+        const dono = usuario.login || usuario.nome;
+        const historico = JSON.parse(localStorage.getItem("historicoCompras")) || [];
+        const compras = historico.filter(c => c && c.comprador === usuario.nome).reverse();
+        const seletor = document.getElementById("compraReclamacao");
+        const form = document.getElementById("formReclamacao");
+        const botao = document.getElementById("abrirReclamacao");
+        const mensagem = document.getElementById("mensagemReclamacao");
+        function opcao(texto, valor) {
+            const item = document.createElement("option");
+            item.textContent = texto; item.value = valor; seletor.appendChild(item);
+        }
+        opcao("Selecione uma compra", "");
+        compras.forEach((c, i) => opcao("Compra " + (compras.length - i) + " — " + c.modelo + " — " + Number(c.preco).toLocaleString("pt-BR", {style:"currency", currency:"BRL"}), String(i)));
+        if (!compras.length) {
+            botao.disabled = true;
+            mensagem.textContent = "Você ainda não tem compras para registrar uma reclamação.";
+        }
+        botao.addEventListener("click", function () {
+            const aberto = form.classList.contains("d-none");
+            form.classList.toggle("d-none");
+            botao.setAttribute("aria-expanded", String(aberto));
+            if (aberto) seletor.focus();
+        });
+        function registros() { return JSON.parse(localStorage.getItem("reclamacoesRegistradas")) || []; }
+        function mostrar() {
+            const lista = document.getElementById("listaReclamacoes");
+            lista.replaceChildren();
+            registros().filter(r => r.usuario === dono).reverse().forEach(r => {
+                const coluna = document.createElement("div"); coluna.className = "col-md-6";
+                const card = document.createElement("div"); card.className = "card card-body h-100";
+                const titulo = document.createElement("h3"); titulo.className = "h5"; titulo.textContent = r.protocolo;
+                card.appendChild(titulo);
+                [r.modelo + " — " + r.assunto, new Date(r.data).toLocaleString("pt-BR"), r.descricao].forEach(texto => {
+                    const p = document.createElement("p"); p.textContent = texto; p.style.whiteSpace = "pre-wrap"; p.style.overflowWrap = "anywhere"; card.appendChild(p);
+                });
+                const apagar = document.createElement("button");
+                apagar.type = "button";
+                apagar.className = "btn btn-outline-danger align-self-start";
+                apagar.textContent = "Apagar reclamação";
+                const confirmacao = document.createElement("div");
+                confirmacao.className = "alert alert-warning confirmacao-exclusao mt-3 d-none";
+                const pergunta = document.createElement("p");
+                pergunta.textContent = "Apagar a reclamação " + r.protocolo + "? Essa ação não pode ser desfeita.";
+                confirmacao.appendChild(pergunta);
+                const confirmar = document.createElement("button");
+                confirmar.type = "button";
+                confirmar.className = "btn btn-danger me-2";
+                confirmar.textContent = "Confirmar exclusão";
+                const cancelar = document.createElement("button");
+                cancelar.type = "button";
+                cancelar.className = "btn btn-outline-secondary";
+                cancelar.textContent = "Cancelar";
+                apagar.addEventListener("click", function () {
+                    confirmacao.classList.remove("d-none");
+                    apagar.classList.add("d-none");
+                    cancelar.focus();
+                });
+                cancelar.addEventListener("click", function () {
+                    confirmacao.classList.add("d-none");
+                    apagar.classList.remove("d-none");
+                    apagar.focus();
+                });
+                confirmar.addEventListener("click", function () {
+                    const restantes = registros().filter(item => !(item.usuario === dono && item.protocolo === r.protocolo && item.data === r.data));
+                    try { localStorage.setItem("reclamacoesRegistradas", JSON.stringify(restantes)); }
+                    catch (erro) { mensagem.textContent = "Não foi possível apagar. Tente novamente."; return; }
+                    mensagem.textContent = "Reclamação apagada.";
+                    mostrar();
+                });
+                confirmacao.appendChild(confirmar);
+                confirmacao.appendChild(cancelar);
+                card.appendChild(apagar);
+                card.appendChild(confirmacao);
+                coluna.appendChild(card); lista.appendChild(coluna);
+            });
+        }
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            if (!form.reportValidity()) return;
+            const descricao = document.getElementById("descricaoReclamacao").value.trim();
+            if (!descricao) { mensagem.textContent = "Descreva o problema antes de salvar."; return; }
+            const compra = compras[Number(seletor.value)];
+            if (seletor.value === "" || !compra) return;
+            const todos = registros();
+            const ultimoNumero = Math.max(Number(localStorage.getItem("ultimoProtocoloReclamacao")) || 0,
+                ...todos.map(item => /^REC-\d+$/.test(item.protocolo) ? Number(item.protocolo.slice(4)) : 0));
+            const proximoNumero = ultimoNumero + 1;
+            const protocolo = "REC-" + String(proximoNumero).padStart(3, "0");
+            todos.push({usuario:dono, protocolo, data:new Date().toISOString(), modelo:compra.modelo, compra:compra, assunto:document.getElementById("assuntoReclamacao").value, descricao});
+            try { localStorage.setItem("ultimoProtocoloReclamacao", String(proximoNumero)); localStorage.setItem("reclamacoesRegistradas", JSON.stringify(todos)); }
+            catch (erro) { mensagem.textContent = "Não foi possível salvar. Tente novamente."; return; }
+            form.reset();
+            mensagem.textContent = "Reclamação salva neste navegador. Protocolo: " + protocolo;
+            mostrar();
+        });
+        mostrar();
+    })();
+    </script>
+
+</body>
+</html>

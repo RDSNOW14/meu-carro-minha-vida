@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Interesse - Meu Carro, Minha Vida</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+                MEU CARRO, MINHA VIDA
+            </a>
+
+            <div class="ms-auto d-flex align-items-center gap-2">
+
+                <a href="dashboard.html"
+                   class="nav-link text-light">
+                    Minha área
+                </a>
+
+                <div class="acessibilidade">
+
+                    <button type="button"
+                            class="btn btn-outline-light btn-sm"
+                            id="diminuirFonte">
+                        A−
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-outline-light btn-sm"
+                            id="aumentarFonte">
+                        A+
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-outline-warning btn-sm"
+                            id="alternarContraste">
+                        Contraste
+                    </button>
+
+                </div>
+
+                <span class="text-warning" id="nomeUsuario"></span>
+
+                <button type="button"
+                        class="btn btn-outline-warning btn-sm"
+                        id="botaoSair">
+                    Sair
+                </button>
+
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+
+        <div class="text-center mb-4">
+            <h1>Encontre o carro ideal</h1>
+
+            <p>
+                Conte um pouco sobre o veículo que você procura.
+            </p>
+        </div>
+
+        <!-- Aparece somente quando o usuário veio de um carro -->
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                <div class="alert alert-warning d-none"
+                     id="veiculoSelecionado">
+
+                    <strong>Veículo selecionado:</strong>
+                    <span id="modeloSelecionado"></span>
+
+                    <br>
+
+                    <strong>Preço:</strong>
+                    <span id="precoSelecionado"></span>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <form id="formInteresse">
+
+                            <div class="mb-3">
+
+                                <label for="tipoVeiculo"
+                                       class="form-label">
+                                    Qual tipo de veículo você procura?
+                                </label>
+
+                                <select class="form-select"
+                                        id="tipoVeiculo"
+                                        required>
+
+                                    <option value="">
+                                        Selecione uma opção
+                                    </option>
+
+                                    <option value="Hatch">Hatch</option>
+                                    <option value="Sedan">Sedan</option>
+                                    <option value="SUV">SUV</option>
+                                    <option value="Esportivo">Esportivo</option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label for="faixaPreco"
+                                       class="form-label">
+                                    Quanto pretende investir?
+                                </label>
+
+                                <input type="range"
+                                       class="form-range"
+                                       id="faixaPreco"
+                                       min="50000"
+                                       max="300000"
+                                       step="10000"
+                                       value="150000">
+
+                                <div class="d-flex justify-content-between">
+
+                                    <span>R$ 50.000</span>
+
+                                    <strong id="valorFaixa">
+                                        R$ 150.000
+                                    </strong>
+
+                                    <span>R$ 300.000</span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label">
+                                    Qual será o principal uso do veículo?
+                                </label>
+
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="usoVeiculo"
+                                           value="Uso na cidade"
+                                           id="usoCidade">
+
+                                    <label class="form-check-label"
+                                           for="usoCidade">
+                                        Uso na cidade
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="usoVeiculo"
+                                           value="Viagens"
+                                           id="usoViagens">
+
+                                    <label class="form-check-label"
+                                           for="usoViagens">
+                                        Viagens
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="usoVeiculo"
+                                           value="Trabalho"
+                                           id="usoTrabalho">
+
+                                    <label class="form-check-label"
+                                           for="usoTrabalho">
+                                        Trabalho
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="usoVeiculo"
+                                           value="Uso familiar"
+                                           id="usoFamiliar">
+
+                                    <label class="form-check-label"
+                                           for="usoFamiliar">
+                                        Uso familiar
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label">
+                                    Quais características são importantes para você?
+                                </label>
+
+                                <div class="form-check">
+                                    <input class="form-check-input caracteristica"
+                                           type="checkbox"
+                                           value="Economia de combustível"
+                                           id="economia">
+
+                                    <label class="form-check-label"
+                                           for="economia">
+                                        Economia de combustível
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input caracteristica"
+                                           type="checkbox"
+                                           value="Tecnologia"
+                                           id="tecnologia">
+
+                                    <label class="form-check-label"
+                                           for="tecnologia">
+                                        Tecnologia
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input caracteristica"
+                                           type="checkbox"
+                                           value="Conforto"
+                                           id="conforto">
+
+                                    <label class="form-check-label"
+                                           for="conforto">
+                                        Conforto
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input caracteristica"
+                                           type="checkbox"
+                                           value="Desempenho"
+                                           id="desempenho">
+
+                                    <label class="form-check-label"
+                                           for="desempenho">
+                                        Desempenho
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input caracteristica"
+                                           type="checkbox"
+                                           value="Espaço interno"
+                                           id="espaco">
+
+                                    <label class="form-check-label"
+                                           for="espaco">
+                                        Espaço interno
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label for="corPreferida"
+                                       class="form-label">
+                                    Cor preferida
+                                </label>
+
+                                <select class="form-select"
+                                        id="corPreferida"
+                                        required>
+
+                                    <option value="">
+                                        Selecione uma cor
+                                    </option>
+
+                                    <option value="Preto">Preto</option>
+                                    <option value="Branco">Branco</option>
+                                    <option value="Prata">Prata</option>
+                                    <option value="Cinza">Cinza</option>
+                                    <option value="Vermelho">Vermelho</option>
+                                    <option value="Azul">Azul</option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label for="observacoes"
+                                       class="form-label">
+                                    Observações
+                                </label>
+
+                                <textarea class="form-control"
+                                          id="observacoes"
+                                          rows="4"
+                                          maxlength="300"
+                                          placeholder="Conte mais sobre o carro que você procura..."></textarea>
+
+                                <small class="text-muted">
+                                    Campo opcional. Máximo de 300 caracteres.
+                                </small>
+
+                            </div>
+
+                            <div id="mensagemInteresse"></div>
+
+                            <div class="d-flex justify-content-end gap-2">
+
+                                <a href="index.html"
+                                   class="btn btn-outline-dark">
+                                    Voltar
+                                </a>
+
+                                <button type="submit"
+                                        class="btn btn-warning">
+                                    Salvar interesse
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+        const parametrosCarro = new URLSearchParams(window.location.search);
+
+        const tipoCarro = parametrosCarro.get("tipo");
+        const modeloCarro = parametrosCarro.get("modelo");
+        const precoCarro = parametrosCarro.get("preco");
+
+        const tipoVeiculoCarro = document.getElementById("tipoVeiculo");
+        const faixaPrecoCarro = document.getElementById("faixaPreco");
+        const valorFaixaCarro = document.getElementById("valorFaixa");
+
+        const caixaVeiculo = document.getElementById("veiculoSelecionado");
+        const modeloSelecionado = document.getElementById("modeloSelecionado");
+        const precoSelecionado = document.getElementById("precoSelecionado");
+
+        if (tipoCarro) {
+            tipoVeiculoCarro.value = tipoCarro;
+        }
+
+        if (precoCarro) {
+            faixaPrecoCarro.value = precoCarro;
+
+            valorFaixaCarro.textContent =
+                Number(precoCarro).toLocaleString(
+                    "pt-BR",
+                    {
+                        style: "currency",
+                        currency: "BRL",
+                        maximumFractionDigits: 0
+                    }
+                );
+        }
+
+        if (modeloCarro && precoCarro) {
+
+    localStorage.setItem("modeloInteresse", modeloCarro);
+
+    modeloSelecionado.textContent = modeloCarro;
+
+    precoSelecionado.textContent =
+        Number(precoCarro).toLocaleString(
+            "pt-BR",
+            {
+                style: "currency",
+                currency: "BRL",
+                maximumFractionDigits: 0
+            }
+        );
+
+    caixaVeiculo.classList.remove("d-none");
+
+} else {
+
+    localStorage.removeItem("modeloInteresse");
+
+}
+    </script>
+
+</body>
+</html>

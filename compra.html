@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Comprar veículo - Meu Carro, Minha Vida</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .menu-compra { padding-block: 1rem; }
+        .menu-compra .nav-link,
+        .menu-compra .navbar-text,
+        .menu-compra .btn { white-space: nowrap; }
+        .menu-compra .navbar-text { display: block; }
+        .menu-compra .acessibilidade { display: flex; align-items: center; gap: .4rem; }
+        .menu-compra .navbar-toggler { margin-left: auto; }
+        @media (min-width: 1200px) {
+            .menu-compra .navbar-nav { gap: .35rem; }
+            .menu-compra #areaUsuarioIndex { margin-left: auto !important; }
+            .menu-compra .nav-link { padding-inline: .65rem; }
+        }
+        @media (max-width: 1199.98px) {
+            .menu-compra .navbar-collapse { padding-top: .75rem; }
+            .menu-compra .navbar-nav { gap: .35rem; align-items: flex-start; }
+            .menu-compra .acessibilidade { margin-top: .5rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark menu-compra">
+        <div class="container">
+
+            
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu"
+                aria-label="Abrir menu"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <ul class="navbar-nav w-100 align-items-xl-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            Início
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                        >
+                            Carros
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a class="dropdown-item" href="index.html#esportivos">
+                                    Esportivos
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="index.html#sedans">
+                                    Sedans
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="index.html#suvs">
+                                    SUVs
+                                </a>
+                            </li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="index.html#catalogo">
+                                    Todos os carros
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#sobre">
+                            Sobre nós
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contato">
+                            Contato
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+    <a class="nav-link" href="dashboard.html" id="linkConta">Minha área</a>
+</li>
+
+<li class="nav-item"><a class="nav-link" href="dashboard.html#areaCompras">Minhas compras</a></li>
+<li class="nav-item ms-xl-2" id="areaUsuarioIndex">
+    <span class="navbar-text text-warning" id="nomeUsuarioIndex"></span>
+</li>
+
+<li class="nav-item ms-xl-2" id="areaSairIndex">
+    <button
+        type="button"
+        class="btn btn-outline-warning btn-sm"
+        id="botaoSairIndex"
+    >
+        Sair
+    </button>
+</li>
+
+                    <li class="nav-item ms-xl-3">
+
+                        <div class="acessibilidade">
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-light btn-sm"
+                                id="diminuirFonte"
+                            >
+                                A−
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-light btn-sm"
+                                id="aumentarFonte"
+                            >
+                                A+
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-warning btn-sm"
+                                id="alternarContraste"
+                            >
+                                Contraste
+                            </button>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+
+        <div class="text-center mb-5">
+            <h1>Finalizar compra</h1>
+            <p>Confira os dados do veículo e escolha a forma de pagamento.</p>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- VEÍCULO -->
+            <div class="col-lg-5">
+
+                <div class="card h-100">
+
+                    <div class="card-body">
+
+                        <h3 class="mb-4">Veículo escolhido</h3>
+                        <img
+    id="imagemCompra"
+    src=""
+    alt="Veículo escolhido"
+    class="img-fluid rounded mb-4 d-none"
+>
+
+                        <p>
+                            <strong>Modelo:</strong>
+                            <span id="compraModelo">Nenhum veículo selecionado</span>
+                        </p>
+
+                        <p>
+                            <strong>Preço:</strong>
+                            <span id="compraPreco">R$ 0,00</span>
+                        </p>
+
+                        <hr>
+
+                        <p class="text-muted">
+                            Confira as informações antes de finalizar a compra.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- DADOS DA COMPRA -->
+            <div class="col-lg-7">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h3 class="mb-4">Dados da compra</h3>
+
+                        <form id="formCompra">
+
+                            <div class="mb-3">
+    <label for="nomeComprador" class="form-label">
+        Nome do comprador
+    </label>
+
+    <input
+        type="text"
+        id="nomeComprador"
+        class="form-control"
+        readonly
+    >
+</div>
+
+<div class="mb-3">
+    <label for="cpfComprador" class="form-label">
+        CPF do comprador
+    </label>
+
+    <input
+        type="text"
+        id="cpfComprador"
+        class="form-control"
+        readonly
+    >
+</div>
+
+
+<div class="mb-3">
+    <label for="enderecoComprador" class="form-label">Endereço cadastrado</label>
+    <textarea id="enderecoComprador" class="form-control" rows="3" readonly></textarea>
+</div>
+                            <div class="mb-3">
+
+                                <label for="formaPagamento" class="form-label">
+                                    Forma de pagamento
+                                </label>
+
+                                <select
+                                    id="formaPagamento"
+                                    class="form-select"
+                                    required
+                                >
+                                    <option value="">Selecione</option>
+                                    <option value="PIX">PIX</option>
+                                    <option value="cartao">Cartao</option>
+                                    <option value="Financiamento">Financiamento</option>
+                                </select>
+
+                            </div>
+
+                            <!-- CARTÃO -->
+                            <div id="areaCartao" class="d-none">
+
+                                <div class="mb-3">
+
+                                    <label for="numeroCartao" class="form-label">
+                                        Número do cartão
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="numeroCartao"
+                                        class="form-control"
+                                        maxlength="16"
+                                        inputmode="numeric"
+                                        placeholder="0000000000000000"
+                                    >
+
+                                </div>
+<div class="mb-3">
+    <label for="parcelasCartao" class="form-label">
+        Parcelas no cartão
+    </label>
+
+    <select id="parcelasCartao" class="form-select">
+        <option value="">Selecione</option>
+        <option value="1">1x</option>
+        <option value="2">2x</option>
+        <option value="3">3x</option>
+        <option value="6">6x</option>
+        <option value="10">10x</option>
+        <option value="12">12x</option>
+    </select>
+</div>
+
+<div class="mb-3">
+    <strong>Valor da parcela:</strong>
+    <span id="valorParcelaCartao">R$ 0,00</span>
+</div>
+                            </div>
+
+                            <!-- FINANCIAMENTO -->
+                            <div id="areaFinanciamento" class="d-none">
+
+                                <div class="mb-3">
+
+                                    <label for="parcelas" class="form-label">
+                                        Quantidade de parcelas
+                                    </label>
+
+                                    <select id="parcelas" class="form-select">
+                                        <option value="">Selecione</option>
+                                        <option value="12">12 parcelas</option>
+                                        <option value="24">24 parcelas</option>
+                                        <option value="36">36 parcelas</option>
+                                        <option value="48">48 parcelas</option>
+                                    </select>
+
+                                </div>
+                                <div class="mt-3 p-3 border rounded">
+    <h5>Resumo do financiamento</h5>
+
+    <p class="mb-1">
+        <strong>Entrada (20%):</strong>
+        <span id="valorEntrada">R$ 0,00</span>
+    </p>
+
+    <p class="mb-1">
+        <strong>Valor financiado:</strong>
+        <span id="valorFinanciado">R$ 0,00</span>
+    </p>
+
+    <p class="mb-1">
+        <strong>Valor da parcela:</strong>
+        <span id="valorParcela">R$ 0,00</span>
+    </p>
+</div>
+
+                            </div>
+
+                            <div
+                                id="mensagemCompra"
+                                class="alert d-none"
+                                role="alert"
+                            ></div>
+
+                            <button
+                                type="submit"
+                                class="btn btn-warning w-100"
+                            >
+                                Finalizar compra
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const sessao = JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        );
+
+        // Protege a página
+        if (!sessao || sessao.logado !== true) {
+            window.location.href = "acesso-negado.html";
+        }
+
+        // Nome do usuário
+        document.getElementById("nomeComprador").value =
+            sessao ? sessao.nome : "";
+            const cadastro = JSON.parse(
+    localStorage.getItem("usuarioCadastrado")
+);
+
+document.getElementById("cpfComprador").value =
+    cadastro ? cadastro.cpf : "";
+
+
+const enderecoCompra = cadastro ? {
+    cep: cadastro.cep || "", logradouro: cadastro.logradouro || "",
+    bairro: cadastro.bairro || "", cidade: cadastro.cidade || "", uf: cadastro.uf || ""
+} : null;
+document.getElementById("enderecoComprador").value = enderecoCompra
+    ? [enderecoCompra.logradouro, enderecoCompra.bairro,
+       [enderecoCompra.cidade, enderecoCompra.uf].filter(Boolean).join(" - "),
+       enderecoCompra.cep ? "CEP: " + enderecoCompra.cep : ""].filter(Boolean).join("\n") || "Endereço não informado no cadastro."
+    : "Endereço não informado no cadastro.";
+document.getElementById("nomeUsuarioIndex").textContent = sessao ? sessao.nome : "";
+document.getElementById("botaoSairIndex").addEventListener("click", function () {
+    localStorage.removeItem("usuarioLogado");
+    window.location.href = "login.html";
+});
+
+        // Recebe o carro pela URL
+        const parametros = new URLSearchParams(window.location.search);
+
+        const modelo = parametros.get("modelo");
+        const preco = parametros.get("preco");
+
+        if (modelo) {
+            document.getElementById("compraModelo").textContent = modelo;
+        }
+        // Imagem do veículo escolhido
+const imagemCompra = document.getElementById("imagemCompra");
+
+const imagensCarros = {
+    "Falcon GT 2026": "assets/img/carro-1.jpg",
+    "Urban Sedan 2026": "assets/img/carro-2.jpg",
+    "Adventure SUV 2026": "assets/img/carro-3.jpg",
+    "Vortex RS 2026": "assets/img/carro-4.jpg",
+    "Prime Sedan 2026": "assets/img/carro-5.jpg",
+    "Titan SUV 2026": "assets/img/carro-6.jpg"
+};
+
+if (modelo && imagensCarros[modelo]) {
+    imagemCompra.src = imagensCarros[modelo];
+    imagemCompra.alt = modelo;
+    imagemCompra.classList.remove("d-none");
+}
+
+        if (preco) {
+
+            const precoFormatado =
+                Number(preco).toLocaleString(
+                    "pt-BR",
+                    {
+                        style: "currency",
+                        currency: "BRL"
+                    }
+                );
+
+            document.getElementById("compraPreco").textContent =
+                precoFormatado;
+        }
+
+
+        // Forma de pagamento
+        const formaPagamento =
+            document.getElementById("formaPagamento");
+
+        const areaCartao =
+            document.getElementById("areaCartao");
+            const parcelasCartao = document.getElementById("parcelasCartao");
+
+function calcularParcelaCartao() {
+    if (!preco || !parcelasCartao.value) {
+        return;
+    }
+
+    const valorCarro = Number(preco);
+    const quantidade = Number(parcelasCartao.value);
+    const valorParcela = valorCarro / quantidade;
+
+    document.getElementById("valorParcelaCartao").textContent =
+        valorParcela.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+}
+
+parcelasCartao.addEventListener("change", calcularParcelaCartao);
+const campoNumeroCartao = document.getElementById("numeroCartao");
+
+campoNumeroCartao.addEventListener("input", function () {
+    campoNumeroCartao.value = campoNumeroCartao.value.replace(/\D/g, "").slice(0, 16);
+});
+
+campoNumeroCartao.addEventListener("paste", function (event) {
+    event.preventDefault();
+    const texto = event.clipboardData.getData("text").replace(/\D/g, "");
+    const inicio = campoNumeroCartao.selectionStart;
+    const fim = campoNumeroCartao.selectionEnd;
+    campoNumeroCartao.value = (
+        campoNumeroCartao.value.slice(0, inicio) + texto + campoNumeroCartao.value.slice(fim)
+    ).replace(/\D/g, "").slice(0, 16);
+    const posicao = Math.min(inicio + texto.length, 16);
+    campoNumeroCartao.setSelectionRange(posicao, posicao);
+});
+
+        const areaFinanciamento =
+            document.getElementById("areaFinanciamento");
+            const parcelas = document.getElementById("parcelas");
+
+function calcularFinanciamento() {
+    if (!preco || !parcelas.value) {
+        return;
+    }
+
+    const valorCarro = Number(preco);
+    const entrada = valorCarro * 0.20;
+    const financiado = valorCarro - entrada;
+    const valorParcela = financiado / Number(parcelas.value);
+
+    document.getElementById("valorEntrada").textContent =
+        entrada.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+
+    document.getElementById("valorFinanciado").textContent =
+        financiado.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+
+    document.getElementById("valorParcela").textContent =
+        valorParcela.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+}
+
+parcelas.addEventListener("change", calcularFinanciamento);
+
+
+        formaPagamento.addEventListener("change", function () {
+
+            areaCartao.classList.add("d-none");
+            areaFinanciamento.classList.add("d-none");
+
+            if (formaPagamento.value === "cartao") {
+                areaCartao.classList.remove("d-none");
+            }
+
+            if (formaPagamento.value === "Financiamento") {
+                areaFinanciamento.classList.remove("d-none");
+            }
+
+        });
+
+
+        // Finalizar compra
+        document
+            .getElementById("formCompra")
+            .addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                const mensagem =
+                    document.getElementById("mensagemCompra");
+
+                if (!modelo || !preco) {
+
+                    mensagem.textContent =
+                        "Nenhum veículo foi selecionado.";
+
+                    mensagem.className =
+                        "alert alert-danger";
+
+                    return;
+                }
+
+                if (!formaPagamento.value) {
+
+                    mensagem.textContent =
+                        "Selecione uma forma de pagamento.";
+
+                    mensagem.className =
+                        "alert alert-danger";
+
+                    return;
+                  
+                }
+
+if (formaPagamento.value === "cartao") {
+    const numeroCartao = document.getElementById("numeroCartao").value;
+    const somenteNumeros = numeroCartao.replace(/\D/g, "");
+
+    if (somenteNumeros.length !== 16) {
+        mensagem.textContent = "Digite os 16 números do cartão.";
+        mensagem.className = "alert alert-danger";
+        return;
+    }
+
+    if (!parcelasCartao.value) {
+        mensagem.textContent = "Selecione a quantidade de parcelas.";
+        mensagem.className = "alert alert-danger";
+        return;
+    }
+}
+
+                const compra = {
+    comprador: sessao.nome,
+    endereco: enderecoCompra,
+    modelo: modelo,
+    preco: Number(preco),
+    pagamento: formaPagamento.value,
+    parcelas: formaPagamento.value === "cartao"
+    ? parcelasCartao.value
+    : formaPagamento.value === "Financiamento"
+        ? parcelas.value
+        : "À vista"
+};
+
+                const historicoSalvo = localStorage.getItem("historicoCompras");
+                const historicoCompras = historicoSalvo ? JSON.parse(historicoSalvo) : [];
+                if (!historicoSalvo) {
+                    const compraAnterior = JSON.parse(localStorage.getItem("compraRealizada"));
+                    if (compraAnterior) historicoCompras.push(compraAnterior);
+                }
+                historicoCompras.push(compra);
+                localStorage.setItem("historicoCompras", JSON.stringify(historicoCompras));
+
+                localStorage.setItem(
+                    "compraRealizada",
+                    JSON.stringify(compra)
+                );
+
+                mensagem.textContent =
+                    "Compra realizada com sucesso!";
+
+                mensagem.className =
+                    "alert alert-success";
+            });
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>const diminuirFonte = document.getElementById("diminuirFonte");
+const aumentarFonte = document.getElementById("aumentarFonte");
+const alternarContraste = document.getElementById("alternarContraste");
+
+diminuirFonte.addEventListener("click", function () {
+    document.body.classList.remove("fonte-extra-grande");
+    document.body.classList.remove("fonte-grande");
+});
+
+aumentarFonte.addEventListener("click", function () {
+    if (document.body.classList.contains("fonte-grande")) {
+        document.body.classList.remove("fonte-grande");
+        document.body.classList.add("fonte-extra-grande");
+    } else {
+        document.body.classList.add("fonte-grande");
+    }
+});
+
+alternarContraste.addEventListener("click", function () {
+    document.body.classList.toggle("alto-contraste");
+});
+    </script>
+
+</body>
+
+</html>

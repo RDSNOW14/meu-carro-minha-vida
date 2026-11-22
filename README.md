@@ -1,67 +1,49 @@
 # Meu Carro, Minha Vida
 
-Projeto acadêmico de desenvolvimento Front-End da UNISUAM, desenvolvido para simular um portal de veículos com catálogo, cadastro e área do cliente.
+Projeto acadêmico de Front-End da UNISUAM: um portal de veículos com catálogo, cadastro, login e área do cliente.
 
-O projeto utiliza HTML, CSS e JavaScript. O armazenamento é feito no `localStorage` do navegador, conforme o enunciado da disciplina. Não há servidor, processamento de pagamentos ou envio de reclamações para uma equipe de atendimento.
+## Integrantes
 
-## Funcionalidades
+- Gustavo Kunze Frazão
+- Rodrigo Almeida Lopes
+- Gabriel Henrique Torres da Silva
 
-- Catálogo de veículos dividido em categorias.
-- Cadastro com validações de dados e consulta de endereço pelo CEP via ViaCEP.
-- Login, identificação do usuário no menu e saída da conta.
-- Área do cliente com perfil e formulário de interesse.
-- Visualização das preferências enviadas no formulário de interesse.
-- Simulação de compras por PIX, cartão e financiamento.
-- Número do cartão limitado a 16 dígitos e seleção de parcelas.
-- Endereço da compra preenchido a partir do cadastro.
-- Histórico de compras e cancelamento com confirmação dentro da página.
-- Registro de reclamações relacionadas a compras, com protocolo sequencial e opção de exclusão.
-- Controles de contraste e tamanho de fonte.
-- Páginas de acesso negado e erro 404.
+## Links
+
+- [Site](https://rdsnow14.github.io/meu-carro-minha-vida/index.html)
+- [GitHub](https://github.com/RDSNOW14/meu-carro-minha-vida)
+- [Figma](https://www.figma.com/proto/hMrij5dnDZDBNBXddr6ZJb?node-id=2-482&starting-point-node-id=2%3A482)
 
 ## Tecnologias
 
-- HTML5
-- CSS3
-- JavaScript
-- Bootstrap 5.3.8
-- API ViaCEP
-- localStorage
+HTML, CSS, JavaScript, Bootstrap 5.3.8, API ViaCEP e localStorage.
 
-## Estrutura do projeto
+## Funcionalidades
 
-```text
-meu-carro-minha-vida/
-├── index.html             # Página inicial e catálogo
-├── cadastro.html          # Cadastro de usuário
-├── login.html             # Entrada na conta
-├── dashboard.html         # Perfil, compras e reclamações
-├── interesse.html         # Formulário de interesse
-├── resultado.html         # Preferências informadas
-├── compra.html            # Simulação da compra
-├── acesso-negado.html     # Acesso sem autenticação
-├── 404.html               # Página de erro
-├── css/
-│   └── style.css
-├── js/
-│   └── script.js
-└── assets/                # Imagens e ícones
-```
+- Catálogo com categorias e detalhes dos veículos.
+- Cadastro com validações e consulta de endereço pelo CEP.
+- Login, logout e área restrita com perfil do usuário.
+- Formulário de interesse e visualização das preferências.
+- Simulação de compras por PIX, cartão e financiamento.
+- Histórico e cancelamento de compras.
+- Reclamações com ou sem compra relacionada.
+- Controles de contraste e tamanho da fonte.
+- Páginas de acesso negado e erro 404.
 
 ## Como executar
 
-1. Baixe o projeto completo e mantenha a organização das pastas.
-2. Abra a pasta em um editor, como o Visual Studio Code.
-3. Para desenvolvimento, utilize um servidor local, como a extensão Live Server, e abra `index.html` por ele.
-4. Faça o cadastro e entre com o login e a senha cadastrados.
-5. Navegue pelo catálogo, simule compras e consulte os registros na Minha área.
+Baixe o projeto, abra a pasta no VS Code e execute o index.html
+com a extensão Live Server. Também é possível acessar o site
+publicado pelo link acima.
 
-É necessária conexão com a internet para carregar o Bootstrap e consultar o CEP. Use sempre o mesmo endereço do site e navegador para consultar os dados salvos. Abrir diretamente os arquivos com `file://` pode apresentar diferenças no compartilhamento do localStorage entre páginas.
+É necessária internet para carregar o Bootstrap e consultar o CEP.
 
-## Dados e limitações da simulação
+## Observações
 
-Os dados ficam no navegador utilizado. Limpar os dados do site pode apagar o cadastro, as compras e as reclamações. Os registros não são compartilhados entre navegadores ou dispositivos.
+Os dados são salvos no navegador e não são compartilhados entre
+dispositivos. O sistema mantém um cadastro por navegador e endereço
+do site; um novo cadastro substitui o anterior.
 
-O cadastro e o login são uma simulação acadêmica e não oferecem a segurança de um sistema com servidor. Utilize dados fictícios, especialmente no preenchimento de senhas e números de cartão. Nenhuma compra realiza cobrança, e o cancelamento apenas altera o registro local.
-
-Os protocolos das reclamações seguem uma sequência, como `REC-001` e `REC-002`. A confirmação de exclusão é integrada à página, sem utilizar caixas de diálogo do navegador.
+Compras e reclamações são simulações locais, sem cobrança ou envio
+para atendimento. O financiamento utiliza entrada de 20% e parcelas
+sem juros. Utilize dados fictícios nos testes.

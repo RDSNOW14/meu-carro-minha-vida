@@ -1,4 +1,4 @@
-// ==================== CADASTRO ====================
+// ==================== CAMPOS DO CADASTRO ====================
 
 const campoCep = document.getElementById("cep");
 const campoCpf = document.getElementById("cpf");
@@ -10,233 +10,8 @@ const campoSenha = document.getElementById("senha");
 const campoConfirmarSenha = document.getElementById("confirmarSenha");
 const formularioCadastro = document.getElementById("formCadastro");
 
-// CEP
-if (campoCep) {
-    campoCep.addEventListener("input", function () {
-        const cep = campoCep.value.replace(/\D/g, "");
-        if (cep.length === 8) buscarCep();
-        else limparEndereco();
-    });
-}
+// ==================== MENSAGENS ====================
 
-async function buscarCep() {
-    const cep = campoCep.value.replace(/\D/g, "");
-
-    if (cep.length !== 8) {
-        mostrarMensagemCadastro("Digite um CEP válido com 8 números.", "danger");
-        return false;
-    }
-
-    try {
-        const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-        const dados = await resposta.json();
-
-        if (dados.erro) {
-            mostrarMensagemCadastro("CEP não encontrado.", "danger");
-            limparEndereco();
-            return false;
-        }
-
-        document.getElementById("logradouro").value = dados.logradouro;
-        document.getElementById("bairro").value = dados.bairro;
-        document.getElementById("cidade").value = dados.localidade;
-        document.getElementById("uf").value = dados.uf;
-        return true;
-    } catch (erro) {
-        console.error("Erro ao consultar CEP:", erro);
-        mostrarMensagemCadastro("Não foi possível consultar o CEP.", "danger");
-        return false;
-    }
-}
-
-function limparEndereco() {
-    ["logradouro", "bairro", "cidade", "uf"].forEach(function (id) {
-        document.getElementById(id).value = "";
-    });
-}
-
-// CPF
-if (campoCpf) {
-    campoCpf.addEventListener("input", function () {
-        let cpf = campoCpf.value.replace(/\D/g, "").substring(0, 11);
-
-        if (cpf.length <= 3) {
-            campoCpf.value = cpf;
-        } else if (cpf.length <= 6) {
-            campoCpf.value = cpf.substring(0, 3) + "." + cpf.substring(3);
-        } else if (cpf.length <= 9) {
-            campoCpf.value = cpf.substring(0, 3) + "." +
-                cpf.substring(3, 6) + "." + cpf.substring(6);
-        } else {
-            campoCpf.value = cpf.substring(0, 3) + "." +
-                cpf.substring(3, 6) + "." +
-                cpf.substring(6, 9) + "-" + cpf.substring(9, 11);
-        }
-    });
-
-    campoCpf.addEventListener("blur", validarCPF);
-}
-
-function validarCPF() {
-    const cpf = campoCpf.value.replace(/\D/g, "");
-
-    if (cpf.length !== 11) {
-        mostrarMensagemCampo("mensagemCPF", campoCpf,
-            "O CPF deve possuir 11 números.", "danger");
-        return false;
-    }
-
-    if (/^(\d)\1{10}$/.test(cpf)) {
-        mostrarMensagemCampo("mensagemCPF", campoCpf, "CPF inválido.", "danger");
-        return false;
-    }
-
-    let soma = 0;
-    for (let i = 0; i < 9; i++) {
-        soma += Number(cpf[i]) * (10 - i);
-    }
-
-    let resto = soma % 11;
-    const primeiroDigito = resto < 2 ? 0 : 11 - resto;
-
-    if (primeiroDigito !== Number(cpf[9])) {
-        mostrarMensagemCampo("mensagemCPF", campoCpf, "CPF inválido.", "danger");
-        return false;
-    }
-
-    soma = 0;
-    for (let i = 0; i < 10; i++) {
-        soma += Number(cpf[i]) * (11 - i);
-    }
-
-    resto = soma % 11;
-    const segundoDigito = resto < 2 ? 0 : 11 - resto;
-
-    if (segundoDigito !== Number(cpf[10])) {
-        mostrarMensagemCampo("mensagemCPF", campoCpf, "CPF inválido.", "danger");
-        return false;
-    }
-
-    mostrarMensagemCampo("mensagemCPF", campoCpf, "CPF válido.", "success");
-    return true;
-}
-
-// NOME
-if (campoNome) campoNome.addEventListener("blur", validarNome);
-
-function validarNome() {
-    const nome = campoNome.value.trim();
-
-    if (nome.length < 15 || nome.length > 80) {
-        mostrarMensagemCampo("mensagemNome", campoNome,
-            "O nome deve possuir entre 15 e 80 caracteres.", "danger");
-        return false;
-    }
-
-    if (!/^[A-Za-zÀ-ÿ\s]+$/.test(nome)) {
-        mostrarMensagemCampo("mensagemNome", campoNome,
-            "O nome deve conter somente letras.", "danger");
-        return false;
-    }
-
-    mostrarMensagemCampo("mensagemNome", campoNome, "Nome válido.", "success");
-    return true;
-}
-
-// TELEFONES
-function aplicarMascaraTelefone(evento) {
-    let numero = evento.target.value.replace(/\D/g, "").substring(0, 12);
-
-    if (numero === "") {
-        evento.target.value = "";
-        return;
-    }
-
-    let resultado = "(+55)";
-    if (numero.length > 2) resultado += numero.substring(2, 4);
-    if (numero.length > 4) resultado += "-" + numero.substring(4);
-
-    evento.target.value = resultado;
-}
-
-function validarTelefone(evento) {
-    const valido = evento.target.value.replace(/\D/g, "").length === 12;
-    evento.target.classList.toggle("is-valid", valido);
-    evento.target.classList.toggle("is-invalid", !valido);
-    return valido;
-}
-
-[campoTelefone, campoCelular].forEach(function (campo) {
-    if (campo) {
-        campo.addEventListener("input", aplicarMascaraTelefone);
-        campo.addEventListener("blur", validarTelefone);
-    }
-});
-
-// LOGIN E SENHA
-function limitarLetras(campo, limite) {
-    if (!campo) return;
-
-    campo.addEventListener("input", function () {
-        campo.value = campo.value
-            .replace(/[^A-Za-zÀ-ÿ]/g, "")
-            .substring(0, limite);
-    });
-}
-
-limitarLetras(campoLogin, 6);
-limitarLetras(campoSenha, 8);
-limitarLetras(campoConfirmarSenha, 8);
-
-if (campoLogin) campoLogin.addEventListener("blur", validarLogin);
-if (campoSenha) campoSenha.addEventListener("blur", validarSenha);
-if (campoConfirmarSenha)
-    campoConfirmarSenha.addEventListener("blur", validarConfirmacaoSenha);
-
-function validarLogin() {
-    if (campoLogin.value.length !== 6) {
-        mostrarMensagemCampo("mensagemLoginCadastro", campoLogin,
-            "O login deve possuir exatamente 6 letras.", "danger");
-        return false;
-    }
-
-    mostrarMensagemCampo("mensagemLoginCadastro", campoLogin,
-        "Login válido.", "success");
-    return true;
-}
-
-function validarSenha() {
-    if (campoSenha.value.length !== 8) {
-        mostrarMensagemCampo("mensagemSenha", campoSenha,
-            "A senha deve possuir exatamente 8 letras.", "danger");
-        return false;
-    }
-
-    mostrarMensagemCampo("mensagemSenha", campoSenha, "Senha válida.", "success");
-    return true;
-}
-
-function validarConfirmacaoSenha() {
-    const confirmacao = campoConfirmarSenha.value;
-
-    if (confirmacao.length !== 8) {
-        mostrarMensagemCampo("mensagemConfirmarSenha", campoConfirmarSenha,
-            "A confirmação deve possuir 8 letras.", "danger");
-        return false;
-    }
-
-    if (campoSenha.value !== confirmacao) {
-        mostrarMensagemCampo("mensagemConfirmarSenha", campoConfirmarSenha,
-            "As senhas não são iguais.", "danger");
-        return false;
-    }
-
-    mostrarMensagemCampo("mensagemConfirmarSenha", campoConfirmarSenha,
-        "Senhas iguais.", "success");
-    return true;
-}
-
-// MENSAGENS
 function mostrarMensagemCampo(id, campo, texto, tipo) {
     let mensagem = document.getElementById(id);
 
@@ -250,15 +25,388 @@ function mostrarMensagemCampo(id, campo, texto, tipo) {
     mensagem.textContent = texto;
 }
 
-function mostrarMensagemCadastro(texto, tipo) {
-    const mensagem = document.getElementById("mensagemCadastro");
+function mostrarMensagemFormulario(id, texto, tipo) {
+    const mensagem = document.getElementById(id);
+
     if (!mensagem) return;
 
     mensagem.className = `alert alert-${tipo} mt-3`;
     mensagem.textContent = texto;
 }
 
-// SALVAR CADASTRO
+function mostrarMensagemCadastro(texto, tipo) {
+    mostrarMensagemFormulario("mensagemCadastro", texto, tipo);
+}
+
+function mostrarMensagemEntrada(texto, tipo) {
+    mostrarMensagemFormulario("mensagemLoginEntrada", texto, tipo);
+}
+
+function mostrarMensagemInteresse(texto, tipo) {
+    mostrarMensagemFormulario("mensagemInteresse", texto, tipo);
+}
+
+// ==================== CEP ====================
+
+let consultaCepAtual = 0;
+let cepConsultado = "";
+
+if (campoCep) {
+    campoCep.addEventListener("input", function () {
+        const cep = campoCep.value
+            .replace(/\D/g, "")
+            .substring(0, 8);
+
+        campoCep.value = cep.replace(/^(\d{5})(\d)/, "$1-$2");
+
+        if (cep.length === 8) {
+            buscarCep();
+        } else {
+            // Impede uma consulta anterior de preencher outro CEP.
+            consultaCepAtual++;
+            limparEndereco();
+        }
+    });
+}
+
+function limparEndereco() {
+    cepConsultado = "";
+
+    ["logradouro", "bairro", "cidade", "uf"].forEach(function (id) {
+        const campo = document.getElementById(id);
+
+        if (campo) campo.value = "";
+    });
+}
+
+async function buscarCep() {
+    if (!campoCep) return false;
+
+    const cep = campoCep.value.replace(/\D/g, "");
+    const numeroConsulta = ++consultaCepAtual;
+
+    limparEndereco();
+
+    if (cep.length !== 8) {
+        mostrarMensagemCadastro(
+            "Digite um CEP válido com 8 números.",
+            "danger"
+        );
+        return false;
+    }
+
+    try {
+        const resposta = await fetch(
+            `https://viacep.com.br/ws/${cep}/json/`
+        );
+
+        if (!resposta.ok) {
+            throw new Error("Falha na consulta do CEP.");
+        }
+
+        const dados = await resposta.json();
+
+        // Ignora respostas antigas caso o usuário altere o CEP.
+        if (numeroConsulta !== consultaCepAtual) return false;
+
+        if (dados.erro) {
+            mostrarMensagemCadastro("CEP não encontrado.", "danger");
+            return false;
+        }
+
+        document.getElementById("logradouro").value =
+            dados.logradouro || "";
+
+        document.getElementById("bairro").value =
+            dados.bairro || "";
+
+        document.getElementById("cidade").value =
+            dados.localidade || "";
+
+        document.getElementById("uf").value =
+            dados.uf || "";
+
+        cepConsultado = cep;
+
+        mostrarMensagemCadastro(
+            "Endereço preenchido pelo CEP.",
+            "success"
+        );
+
+        return true;
+    } catch (erro) {
+        if (numeroConsulta !== consultaCepAtual) return false;
+
+        console.error("Erro ao consultar CEP:", erro);
+
+        mostrarMensagemCadastro(
+            "Não foi possível consultar o CEP. Tente novamente.",
+            "danger"
+        );
+
+        return false;
+    }
+}
+
+// ==================== CPF ====================
+
+if (campoCpf) {
+    campoCpf.addEventListener("input", function () {
+        const cpf = campoCpf.value
+            .replace(/\D/g, "")
+            .substring(0, 11);
+
+        campoCpf.value = cpf
+            .replace(/^(\d{3})(\d)/, "$1.$2")
+            .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+            .replace(/\.(\d{3})(\d)/, ".$1-$2");
+    });
+
+    campoCpf.addEventListener("blur", validarCPF);
+}
+
+function validarCPF() {
+    const cpf = campoCpf.value.replace(/\D/g, "");
+
+    if (cpf.length !== 11) {
+        mostrarMensagemCampo(
+            "mensagemCPF",
+            campoCpf,
+            "O CPF deve possuir 11 números.",
+            "danger"
+        );
+        return false;
+    }
+
+    if (/^(\d)\1{10}$/.test(cpf)) {
+        mostrarMensagemCampo(
+            "mensagemCPF",
+            campoCpf,
+            "CPF inválido.",
+            "danger"
+        );
+        return false;
+    }
+
+    for (let tamanho = 9; tamanho <= 10; tamanho++) {
+        let soma = 0;
+
+        for (let i = 0; i < tamanho; i++) {
+            soma += Number(cpf[i]) * (tamanho + 1 - i);
+        }
+
+        const resto = soma % 11;
+        const digito = resto < 2 ? 0 : 11 - resto;
+
+        if (digito !== Number(cpf[tamanho])) {
+            mostrarMensagemCampo(
+                "mensagemCPF",
+                campoCpf,
+                "CPF inválido.",
+                "danger"
+            );
+            return false;
+        }
+    }
+
+    mostrarMensagemCampo(
+        "mensagemCPF",
+        campoCpf,
+        "CPF válido.",
+        "success"
+    );
+
+    return true;
+}
+
+// ==================== NOME ====================
+
+if (campoNome) {
+    campoNome.addEventListener("blur", validarNome);
+}
+
+function validarNome() {
+    const nome = campoNome.value.trim();
+
+    if (nome.length < 15 || nome.length > 80) {
+        mostrarMensagemCampo(
+            "mensagemNome",
+            campoNome,
+            "O nome deve possuir entre 15 e 80 caracteres.",
+            "danger"
+        );
+        return false;
+    }
+
+    if (!/^[\p{L} ]+$/u.test(nome)) {
+        mostrarMensagemCampo(
+            "mensagemNome",
+            campoNome,
+            "O nome deve conter somente letras e espaços.",
+            "danger"
+        );
+        return false;
+    }
+
+    mostrarMensagemCampo(
+        "mensagemNome",
+        campoNome,
+        "Nome válido.",
+        "success"
+    );
+
+    return true;
+}
+
+// ==================== TELEFONES ====================
+
+function aplicarMascaraTelefone(evento) {
+    const campo = evento.target;
+    const limiteNacional = campo.id === "celular" ? 11 : 10;
+    const valorOriginal = campo.value.trim();
+
+    let numero = valorOriginal.replace(/\D/g, "");
+
+    // Remove o código do país quando ele já estiver informado.
+    const possuiPrefixo = /^\(?\+55\)?/.test(valorOriginal);
+    const possuiCodigoCompleto =
+        numero.startsWith("55") && numero.length > limiteNacional;
+
+    if (possuiPrefixo || possuiCodigoCompleto) {
+        numero = numero.substring(2);
+    }
+
+    numero = numero.substring(0, limiteNacional);
+
+    if (numero === "") {
+        campo.value = "";
+        return;
+    }
+
+    const ddd = numero.substring(0, 2);
+    const telefone = numero.substring(2);
+
+    campo.value = "(+55)" + ddd;
+
+    if (telefone !== "") {
+        campo.value += "-" + telefone;
+    }
+}
+
+function validarTelefone(evento) {
+    const campo = evento.target;
+    const numero = campo.value.replace(/\D/g, "");
+
+    if (campo.id === "telefoneFixo" && numero === "") {
+        campo.classList.remove("is-valid", "is-invalid");
+        return true;
+    }
+
+    const limite = campo.id === "celular" ? 13 : 12;
+    const valido =
+        numero.startsWith("55") && numero.length === limite;
+
+    campo.classList.toggle("is-valid", valido);
+    campo.classList.toggle("is-invalid", !valido);
+
+    return valido;
+}
+
+[campoTelefone, campoCelular].forEach(function (campo) {
+    if (!campo) return;
+
+    campo.addEventListener("input", aplicarMascaraTelefone);
+    campo.addEventListener("blur", validarTelefone);
+});
+
+// ==================== LOGIN E SENHA DO CADASTRO ====================
+
+function limitarLetras(campo, limite) {
+    if (!campo) return;
+
+    campo.addEventListener("input", function () {
+        campo.value = campo.value
+            .replace(/[^\p{L}]/gu, "")
+            .substring(0, limite);
+    });
+}
+
+limitarLetras(campoLogin, 6);
+limitarLetras(campoSenha, 8);
+limitarLetras(campoConfirmarSenha, 8);
+
+if (campoLogin) {
+    campoLogin.addEventListener("blur", validarLogin);
+}
+
+if (campoSenha) {
+    campoSenha.addEventListener("blur", validarSenha);
+}
+
+if (campoConfirmarSenha) {
+    campoConfirmarSenha.addEventListener(
+        "blur",
+        validarConfirmacaoSenha
+    );
+}
+
+function validarLogin() {
+    const valido = /^\p{L}{6}$/u.test(campoLogin.value);
+
+    mostrarMensagemCampo(
+        "mensagemLoginCadastro",
+        campoLogin,
+        valido
+            ? "Login válido."
+            : "O login deve possuir exatamente 6 letras.",
+        valido ? "success" : "danger"
+    );
+
+    return valido;
+}
+
+function validarSenha() {
+    const valido = /^\p{L}{8}$/u.test(campoSenha.value);
+
+    mostrarMensagemCampo(
+        "mensagemSenha",
+        campoSenha,
+        valido
+            ? "Senha válida."
+            : "A senha deve possuir exatamente 8 letras.",
+        valido ? "success" : "danger"
+    );
+
+    return valido;
+}
+
+function validarConfirmacaoSenha() {
+    const confirmacao = campoConfirmarSenha.value;
+
+    if (!/^\p{L}{8}$/u.test(confirmacao)) {
+        mostrarMensagemCampo(
+            "mensagemConfirmarSenha",
+            campoConfirmarSenha,
+            "A confirmação deve possuir 8 letras.",
+            "danger"
+        );
+        return false;
+    }
+
+    const valido = campoSenha.value === confirmacao;
+
+    mostrarMensagemCampo(
+        "mensagemConfirmarSenha",
+        campoConfirmarSenha,
+        valido ? "Senhas iguais." : "As senhas não são iguais.",
+        valido ? "success" : "danger"
+    );
+
+    return valido;
+}
+
+// ==================== SALVAR CADASTRO ====================
+
 if (formularioCadastro) {
     formularioCadastro.addEventListener("submit", function (evento) {
         evento.preventDefault();
@@ -269,25 +417,41 @@ if (formularioCadastro) {
         const senhaValida = validarSenha();
         const confirmacaoValida = validarConfirmacaoSenha();
 
-        const telefoneValido =
-            campoTelefone.value.replace(/\D/g, "").length === 12;
-        const celularValido =
-            campoCelular.value.replace(/\D/g, "").length === 12;
+        const telefoneValido = validarTelefone({
+            target: campoTelefone
+        });
+
+        const celularValido = validarTelefone({
+            target: campoCelular
+        });
 
         const logradouro = document.getElementById("logradouro").value;
         const bairro = document.getElementById("bairro").value;
         const cidade = document.getElementById("cidade").value;
         const uf = document.getElementById("uf").value;
+        const cep = campoCep.value.replace(/\D/g, "");
 
         const enderecoValido =
-            logradouro !== "" && bairro !== "" && cidade !== "" && uf !== "";
+            cep.length === 8 &&
+            cepConsultado === cep &&
+            logradouro.trim() !== "" &&
+            bairro.trim() !== "" &&
+            cidade.trim() !== "" &&
+            uf.trim() !== "";
 
-        if (!nomeValido || !cpfValido || !loginValido ||
-            !senhaValida || !confirmacaoValida ||
-            !telefoneValido || !celularValido || !enderecoValido) {
-
+        if (
+            !nomeValido ||
+            !cpfValido ||
+            !loginValido ||
+            !senhaValida ||
+            !confirmacaoValida ||
+            !telefoneValido ||
+            !celularValido ||
+            !enderecoValido
+        ) {
             mostrarMensagemCadastro(
-                "Verifique os campos do cadastro antes de continuar.", "danger"
+                "Verifique os campos e aguarde o preenchimento do endereço pelo CEP.",
+                "danger"
             );
             return;
         }
@@ -306,12 +470,19 @@ if (formularioCadastro) {
             senha: campoSenha.value
         };
 
-        localStorage.setItem("usuarioCadastrado", JSON.stringify(usuario));
-        mostrarMensagemCadastro("Cadastro realizado com sucesso!", "success");
+        localStorage.setItem(
+            "usuarioCadastrado",
+            JSON.stringify(usuario)
+        );
+
+        mostrarMensagemCadastro(
+            "Cadastro realizado com sucesso!",
+            "success"
+        );
     });
 }
 
-//  LOGIN 
+// ==================== LOGIN ====================
 
 const formularioLogin = document.getElementById("formLogin");
 const loginEntrada = document.getElementById("loginEntrada");
@@ -328,44 +499,47 @@ if (formularioLogin) {
 
         if (!usuarioSalvo) {
             mostrarMensagemEntrada(
-                "Nenhum usuário cadastrado. Crie uma conta primeiro.", "danger"
+                "Nenhum usuário cadastrado. Crie uma conta primeiro.",
+                "danger"
             );
             return;
         }
 
         const usuario = JSON.parse(usuarioSalvo);
 
-        if (loginEntrada.value === usuario.login &&
-            senhaEntrada.value === usuario.senha) {
-
+        if (
+            loginEntrada.value === usuario.login &&
+            senhaEntrada.value === usuario.senha
+        ) {
             const sessao = {
                 nome: usuario.nome,
                 login: usuario.login,
                 logado: true
             };
 
-            localStorage.setItem("usuarioLogado", JSON.stringify(sessao));
-            mostrarMensagemEntrada("Login realizado com sucesso!", "success");
+            localStorage.setItem(
+                "usuarioLogado",
+                JSON.stringify(sessao)
+            );
+
+            mostrarMensagemEntrada(
+                "Login realizado com sucesso!",
+                "success"
+            );
 
             setTimeout(function () {
                 window.location.href = "dashboard.html";
             }, 800);
         } else {
-            mostrarMensagemEntrada("Login ou senha inválidos.", "danger");
+            mostrarMensagemEntrada(
+                "Login ou senha inválidos.",
+                "danger"
+            );
         }
     });
 }
 
-function mostrarMensagemEntrada(texto, tipo) {
-    const mensagem = document.getElementById("mensagemLoginEntrada");
-    if (!mensagem) return;
-
-    mensagem.className = `alert alert-${tipo} mt-3`;
-    mensagem.textContent = texto;
-}
-
-
-//  ÁREA RESTRITA 
+// ==================== ÁREA RESTRITA ====================
 
 const nomeUsuario = document.getElementById("nomeUsuario");
 const botaoSair = document.getElementById("botaoSair");
@@ -374,7 +548,7 @@ const areaPerfil = document.getElementById("areaPerfil");
 const formularioInteresse = document.getElementById("formInteresse");
 const resultadoTipo = document.getElementById("resultadoTipo");
 
-// PROTEÇÃO
+// PROTEÇÃO DAS PÁGINAS
 if (nomeUsuario || formularioInteresse || resultadoTipo) {
     const sessaoSalva = localStorage.getItem("usuarioLogado");
 
@@ -402,16 +576,25 @@ if (botaoPerfil && areaPerfil) {
         }
 
         const usuarioSalvo = localStorage.getItem("usuarioCadastrado");
+
         if (!usuarioSalvo) return;
 
         const usuario = JSON.parse(usuarioSalvo);
 
-        document.getElementById("perfilNome").textContent = usuario.nome;
-        document.getElementById("perfilCpf").textContent = usuario.cpf;
-        document.getElementById("perfilCidade").textContent = usuario.cidade;
-        document.getElementById("perfilUf").textContent = usuario.uf;
-        document.getElementById("perfilCelular").textContent = usuario.celular;
-        document.getElementById("perfilLogin").textContent = usuario.login;
+        const camposPerfil = {
+            perfilNome: usuario.nome,
+            perfilCpf: usuario.cpf,
+            perfilCidade: usuario.cidade,
+            perfilUf: usuario.uf,
+            perfilCelular: usuario.celular,
+            perfilLogin: usuario.login
+        };
+
+        Object.entries(camposPerfil).forEach(function ([id, valor]) {
+            const campo = document.getElementById(id);
+
+            if (campo) campo.textContent = valor;
+        });
 
         areaPerfil.classList.remove("d-none");
         botaoPerfil.textContent = "Ocultar meus dados";
@@ -426,31 +609,56 @@ if (botaoSair) {
     });
 }
 
-//  INTERESSE 
+// ==================== INTERESSE ====================
 
 const faixaPreco = document.getElementById("faixaPreco");
 const valorFaixa = document.getElementById("valorFaixa");
+const campoTipoVeiculo = document.getElementById("tipoVeiculo");
+
+function formatarPreco(valor) {
+    return Number(valor).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        maximumFractionDigits: 0
+    });
+}
 
 if (faixaPreco && valorFaixa) {
     function atualizarValorFaixa() {
-        valorFaixa.textContent = Number(faixaPreco.value).toLocaleString(
-            "pt-BR",
-            { style: "currency", currency: "BRL", maximumFractionDigits: 0 }
-        );
+        valorFaixa.textContent = formatarPreco(faixaPreco.value);
     }
 
     atualizarValorFaixa();
     faixaPreco.addEventListener("input", atualizarValorFaixa);
 }
 
+// Seleciona a categoria recebida pelo link do catálogo.
+if (campoTipoVeiculo) {
+    const parametros = new URLSearchParams(window.location.search);
+    const tipoRecebido = parametros.get("tipo");
+
+    const tipoExiste = Array.from(campoTipoVeiculo.options).some(
+        opcao => opcao.value === tipoRecebido
+    );
+
+    if (tipoRecebido && tipoExiste) {
+        campoTipoVeiculo.value = tipoRecebido;
+    }
+}
+
 if (formularioInteresse) {
     formularioInteresse.addEventListener("submit", function (evento) {
         evento.preventDefault();
 
-        const tipo = document.getElementById("tipoVeiculo").value;
-        const uso = document.querySelector('input[name="usoVeiculo"]:checked');
+        const tipo = campoTipoVeiculo.value;
+        const uso = document.querySelector(
+            'input[name="usoVeiculo"]:checked'
+        );
+
         const cor = document.getElementById("corPreferida").value;
-        const observacoes = document.getElementById("observacoes").value.trim();
+        const observacoes = document
+            .getElementById("observacoes")
+            .value.trim();
 
         const caracteristicas = Array.from(
             document.querySelectorAll(".caracteristica:checked")
@@ -460,14 +668,16 @@ if (formularioInteresse) {
 
         if (tipo === "" || !uso || cor === "") {
             mostrarMensagemInteresse(
-                "Preencha os campos obrigatórios antes de continuar.", "danger"
+                "Preencha os campos obrigatórios antes de continuar.",
+                "danger"
             );
             return;
         }
 
         if (caracteristicas.length === 0) {
             mostrarMensagemInteresse(
-                "Selecione pelo menos uma característica importante.", "danger"
+                "Selecione pelo menos uma característica importante.",
+                "danger"
             );
             return;
         }
@@ -481,8 +691,15 @@ if (formularioInteresse) {
             observacoes: observacoes
         };
 
-        localStorage.setItem("interesseUsuario", JSON.stringify(interesse));
-        mostrarMensagemInteresse("Interesse salvo com sucesso!", "success");
+        localStorage.setItem(
+            "interesseUsuario",
+            JSON.stringify(interesse)
+        );
+
+        mostrarMensagemInteresse(
+            "Interesse salvo com sucesso!",
+            "success"
+        );
 
         setTimeout(function () {
             window.location.href = "resultado.html";
@@ -490,15 +707,7 @@ if (formularioInteresse) {
     });
 }
 
-function mostrarMensagemInteresse(texto, tipo) {
-    const mensagem = document.getElementById("mensagemInteresse");
-    if (!mensagem) return;
-
-    mensagem.className = `alert alert-${tipo} mt-3`;
-    mensagem.textContent = texto;
-}
-
-//  RESULTADO 
+// ==================== RESULTADO ====================
 
 if (resultadoTipo) {
     const interesseSalvo = localStorage.getItem("interesseUsuario");
@@ -506,96 +715,105 @@ if (resultadoTipo) {
     const resultadoPreco = document.getElementById("resultadoPreco");
     const resultadoUso = document.getElementById("resultadoUso");
     const resultadoCor = document.getElementById("resultadoCor");
-    const resultadoCaracteristicas =
-        document.getElementById("resultadoCaracteristicas");
-    const resultadoObservacoes =
-        document.getElementById("resultadoObservacoes");
+
+    const resultadoCaracteristicas = document.getElementById(
+        "resultadoCaracteristicas"
+    );
+
+    const resultadoObservacoes = document.getElementById(
+        "resultadoObservacoes"
+    );
 
     if (!interesseSalvo) {
         resultadoTipo.textContent = "Nenhum interesse cadastrado.";
-        resultadoPreco.textContent = "-";
-        resultadoUso.textContent = "-";
-        resultadoCor.textContent = "-";
-        resultadoCaracteristicas.textContent = "-";
-        resultadoObservacoes.textContent = "-";
+
+        [
+            resultadoPreco,
+            resultadoUso,
+            resultadoCor,
+            resultadoCaracteristicas,
+            resultadoObservacoes
+        ].forEach(function (campo) {
+            if (campo) campo.textContent = "-";
+        });
     } else {
         const interesse = JSON.parse(interesseSalvo);
 
         resultadoTipo.textContent = interesse.tipo;
-        resultadoPreco.textContent = interesse.preco.toLocaleString(
-            "pt-BR",
-            { style: "currency", currency: "BRL", maximumFractionDigits: 0 }
-        );
-
+        resultadoPreco.textContent = formatarPreco(interesse.preco);
         resultadoUso.textContent = interesse.uso;
         resultadoCor.textContent = interesse.cor;
+
         resultadoCaracteristicas.textContent =
             interesse.caracteristicas.join(", ");
 
         resultadoObservacoes.textContent =
-            interesse.observacoes !== ""
-                ? interesse.observacoes
-                : "Nenhuma observação informada.";
+            interesse.observacoes || "Nenhuma observação informada.";
     }
 }
 
-//  ACESSIBILIDADE 
+// ==================== ACESSIBILIDADE ====================
 
 const botaoAumentarFonte = document.getElementById("aumentarFonte");
 const botaoDiminuirFonte = document.getElementById("diminuirFonte");
 const botaoContraste = document.getElementById("alternarContraste");
 
 let tamanhoFonte = Number(localStorage.getItem("tamanhoFonte")) || 0;
-const contrasteSalvo = localStorage.getItem("altoContraste");
+tamanhoFonte = Math.min(2, Math.max(0, Math.trunc(tamanhoFonte)));
 
 aplicarTamanhoFonte();
 
-if (contrasteSalvo === "true") {
+if (localStorage.getItem("altoContraste") === "true") {
     document.body.classList.add("alto-contraste");
+}
+
+function aplicarTamanhoFonte() {
+    document.body.classList.toggle(
+        "fonte-grande",
+        tamanhoFonte === 1
+    );
+
+    document.body.classList.toggle(
+        "fonte-extra-grande",
+        tamanhoFonte === 2
+    );
+}
+
+function alterarTamanhoFonte(variacao) {
+    tamanhoFonte = Math.min(
+        2,
+        Math.max(0, tamanhoFonte + variacao)
+    );
+
+    aplicarTamanhoFonte();
+    localStorage.setItem("tamanhoFonte", tamanhoFonte);
 }
 
 if (botaoAumentarFonte) {
     botaoAumentarFonte.addEventListener("click", function () {
-        if (tamanhoFonte < 2) {
-            tamanhoFonte++;
-            aplicarTamanhoFonte();
-            localStorage.setItem("tamanhoFonte", tamanhoFonte);
-        }
+        alterarTamanhoFonte(1);
     });
 }
 
 if (botaoDiminuirFonte) {
     botaoDiminuirFonte.addEventListener("click", function () {
-        if (tamanhoFonte > 0) {
-            tamanhoFonte--;
-            aplicarTamanhoFonte();
-            localStorage.setItem("tamanhoFonte", tamanhoFonte);
-        }
+        alterarTamanhoFonte(-1);
     });
-}
-
-function aplicarTamanhoFonte() {
-    document.body.classList.remove("fonte-grande", "fonte-extra-grande");
-
-    if (tamanhoFonte === 1)
-        document.body.classList.add("fonte-grande");
-
-    if (tamanhoFonte === 2)
-        document.body.classList.add("fonte-extra-grande");
 }
 
 if (botaoContraste) {
     botaoContraste.addEventListener("click", function () {
         document.body.classList.toggle("alto-contraste");
 
-        const ativado =
-            document.body.classList.contains("alto-contraste");
+        const ativado = document.body.classList.contains(
+            "alto-contraste"
+        );
 
         localStorage.setItem("altoContraste", ativado);
     });
 }
 
-//  MENU INICIAL
+// ==================== MENU INICIAL ====================
 
 const linkConta = document.getElementById("linkConta");
 
@@ -612,7 +830,7 @@ if (linkConta) {
     }
 }
 
-// MOSTRAR SENHAS
+// ==================== MOSTRAR SENHAS ====================
 
 function configurarMostrarSenha(idCampo, idBotao) {
     const campo = document.getElementById(idCampo);
@@ -621,28 +839,13 @@ function configurarMostrarSenha(idCampo, idBotao) {
     if (!campo || !botao) return;
 
     botao.addEventListener("click", function () {
-        if (campo.type === "password") {
-            campo.type = "text";
-            botao.textContent = "Ocultar";
-        } else {
-            campo.type = "password";
-            botao.textContent = "Mostrar";
-        }
+        const mostrar = campo.type === "password";
+
+        campo.type = mostrar ? "text" : "password";
+        botao.textContent = mostrar ? "Ocultar" : "Mostrar";
     });
 }
 
 configurarMostrarSenha("senha", "mostrarSenha");
 configurarMostrarSenha("confirmarSenha", "mostrarConfirmarSenha");
 configurarMostrarSenha("senhaEntrada", "mostrarSenhaEntrada");
-
-// Selecionar tipo do carro
-const campoTipoVeiculo = document.getElementById("tipoVeiculo");
-
-if (campoTipoVeiculo) {
-    const parametros = new URLSearchParams(window.location.search);
-    const tipoRecebido = parametros.get("tipo");
-
-    if (tipoRecebido) {
-        campoTipoVeiculo.value = tipoRecebido;
-    }
-}

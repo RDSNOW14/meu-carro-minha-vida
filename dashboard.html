@@ -177,11 +177,16 @@
 
         <section class="mt-5" id="areaReclamacoes" aria-labelledby="tituloReclamacoes">
             <h2 id="tituloReclamacoes" class="mb-3">Ajuda e reclamações</h2>
-            <p>Registre um problema relacionado à sua compra.</p>
+            <p>Registre um problema sobre compras, atendimento ou uso do site.</p>
 
             <button type="button" class="btn btn-warning mb-3" id="abrirReclamacao" aria-expanded="false" aria-controls="formReclamacao">Registrar reclamação</button>
             <form id="formReclamacao" class="card card-body d-none mb-4">
-                <div class="mb-3"><label for="compraReclamacao" class="form-label">Compra relacionada</label><select id="compraReclamacao" class="form-select" required></select></div>
+                <div class="mb-3">
+    <label for="compraReclamacao" class="form-label">
+        Compra relacionada (opcional)
+    </label>
+    <select id="compraReclamacao" class="form-select"></select>
+</div>
                 <div class="mb-3"><label for="assuntoReclamacao" class="form-label">Assunto</label><select id="assuntoReclamacao" class="form-select" required><option value="">Selecione</option><option>Pagamento</option><option>Veículo</option><option>Atendimento</option><option>Outro</option></select></div>
                 <div class="mb-3"><label for="descricaoReclamacao" class="form-label">Descrição do problema</label><textarea id="descricaoReclamacao" class="form-control" rows="4" maxlength="2000" required></textarea></div>
                 <button type="submit" class="btn btn-warning align-self-start">Salvar reclamação</button>
@@ -321,12 +326,10 @@
             const item = document.createElement("option");
             item.textContent = texto; item.value = valor; seletor.appendChild(item);
         }
-        opcao("Selecione uma compra", "");
+        opcao("Não se refere a uma compra", "");
         compras.forEach((c, i) => opcao("Compra " + (compras.length - i) + " — " + c.modelo + " — " + Number(c.preco).toLocaleString("pt-BR", {style:"currency", currency:"BRL"}), String(i)));
-        if (!compras.length) {
-            botao.disabled = true;
-            mensagem.textContent = "Você ainda não tem compras para registrar uma reclamação.";
-        }
+        
+    
         botao.addEventListener("click", function () {
             const aberto = form.classList.contains("d-none");
             form.classList.toggle("d-none");
@@ -342,7 +345,11 @@
                 const card = document.createElement("div"); card.className = "card card-body h-100";
                 const titulo = document.createElement("h3"); titulo.className = "h5"; titulo.textContent = r.protocolo;
                 card.appendChild(titulo);
-                [r.modelo + " — " + r.assunto, new Date(r.data).toLocaleString("pt-BR"), r.descricao].forEach(texto => {
+                [
+    (r.modelo || "Reclamação geral") + " — " + r.assunto,
+    new Date(r.data).toLocaleString("pt-BR"),
+    r.descricao
+].forEach(texto => {
                     const p = document.createElement("p"); p.textContent = texto; p.style.whiteSpace = "pre-wrap"; p.style.overflowWrap = "anywhere"; card.appendChild(p);
                 });
                 const apagar = document.createElement("button");
@@ -391,14 +398,28 @@
             if (!form.reportValidity()) return;
             const descricao = document.getElementById("descricaoReclamacao").value.trim();
             if (!descricao) { mensagem.textContent = "Descreva o problema antes de salvar."; return; }
-            const compra = compras[Number(seletor.value)];
-            if (seletor.value === "" || !compra) return;
+            const compra = seletor.value === ""
+    ? null
+    : compras[Number(seletor.value)];
+
+if (seletor.value !== "" && !compra) {
+    mensagem.textContent = "Compra não encontrada. Selecione novamente.";
+    return;
+}
             const todos = registros();
             const ultimoNumero = Math.max(Number(localStorage.getItem("ultimoProtocoloReclamacao")) || 0,
                 ...todos.map(item => /^REC-\d+$/.test(item.protocolo) ? Number(item.protocolo.slice(4)) : 0));
             const proximoNumero = ultimoNumero + 1;
             const protocolo = "REC-" + String(proximoNumero).padStart(3, "0");
-            todos.push({usuario:dono, protocolo, data:new Date().toISOString(), modelo:compra.modelo, compra:compra, assunto:document.getElementById("assuntoReclamacao").value, descricao});
+            todos.push({
+    usuario: dono,
+    protocolo: protocolo,
+    data: new Date().toISOString(),
+    modelo: compra ? compra.modelo : null,
+    compra: compra,
+    assunto: document.getElementById("assuntoReclamacao").value,
+    descricao: descricao
+});
             try { localStorage.setItem("ultimoProtocoloReclamacao", String(proximoNumero)); localStorage.setItem("reclamacoesRegistradas", JSON.stringify(todos)); }
             catch (erro) { mensagem.textContent = "Não foi possível salvar. Tente novamente."; return; }
             form.reset();
